@@ -4,12 +4,33 @@
     height: 100vh;
 }
 
-.main-container {
+.not-top-container {
     display: flex;
-    flex-grow: 1;
+    height: 100vh;
 }
 
 .top-banner {
     text-align: center;
 }
 
+.main-container {
+    border: 1px solid black;
+    display: flex;
+    flex-grow: 1;
+}
+
+.side-banner {
+
+    justify-content: center;
+    background-color: orange;
+}
+
+.side-banner-link {
+    display: block;
+    width: 50px;
+    padding: 12px;
+    margin: 0 6px 6px;
+    background: darkorange;
+    text-decoration: none;
+    color: white;
+}

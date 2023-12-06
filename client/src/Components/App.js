@@ -8,7 +8,7 @@ export default function App () {
     return (
         <div className='app-container'>
             <TopBanner title={'Milk n Peppers'} />
-            <div className='main-container'>
+            <div className='not-top-container'>
                 <SideBanner />
                 <Main />
             </div>
