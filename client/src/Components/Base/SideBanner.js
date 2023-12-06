@@ -11,7 +11,7 @@ export default function SideBanner () {
                 <NavLink
                     key = {index}
                     className = 'side-banner-link'
-                    to = {linkString === 'home' ? '/' : linkString}
+                    to = {linkString === 'home' ? '/' : `/${linkString}`}
                     exact
                     activeStyle = {{ background: 'pink', }}
                 >
