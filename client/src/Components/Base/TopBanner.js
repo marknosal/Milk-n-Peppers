@@ -1,7 +1,11 @@
 import React from 'react'
+import '../../index.css'
 
-export default function TopBanner () {
+export default function TopBanner ({ title }) {
     return (
-        <h1>TopBanner</h1>
+        <div className='top-banner'>
+            <h1>{title}</h1>
+            <hr />
+        </div>
     )
 }

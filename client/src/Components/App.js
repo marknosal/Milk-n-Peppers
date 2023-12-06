@@ -4,17 +4,14 @@ import SideBanner from './Base/SideBanner';
 import Main from './Base/Main';
 import '../index.css'
 
-const App = () => {
-
-  return (
-    <div className='app-container'>
-      <TopBanner />
-      <div className='main-container'>
-        <SideBanner />
-        <Main />
-      </div>
-    </div>
-  );
+export default function App () {
+    return (
+        <div className='app-container'>
+            <TopBanner title={'Milk n Peppers'} />
+            <div className='main-container'>
+                <SideBanner />
+                <Main />
+            </div>
+        </div>
+    );
 };
-
-export default App;
