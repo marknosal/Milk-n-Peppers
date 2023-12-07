@@ -17,7 +17,7 @@ class Custom(db.Model, SerializerMixin):
     notes = db.Column(db.String)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    clothing_id = db.Column(db.Integer, db.ForeignKey('customs.id'))
+    clothing_id = db.Column(db.Integer, db.ForeignKey('clothings.id'))
 
     # relationships
     user = db.relationship('User', back_populates='customs')
