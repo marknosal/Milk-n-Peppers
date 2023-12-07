@@ -13,15 +13,16 @@ if __name__ == '__main__':
         print('Starting seed...')
 
         # Clear db records
+        print('Clearing DB records...')
         User.query.delete()
         Blog.query.delete()
         Custom.query.delete()
         Clothing.query.delete()
         db.session.commit()
-        print('DB records cleared...')
+        print('DB records cleared.')
         
         # Create User records
-        print('Creating users')
+        print('Creating users...')
         def generate_random_string(min, max):
             characters = string.ascii_letters + string.digits
             random_length = randint(min, max)
@@ -45,7 +46,7 @@ if __name__ == '__main__':
             users.append(new_user)
         db.session.add_all(users + [user_admin])
         db.session.commit()
-        print('Users created...')
+        print('Users created.')
 
         # Create clothing records
         print('Creating clothings...')
@@ -70,7 +71,7 @@ if __name__ == '__main__':
             clothings.append(new_clothing)
         db.session.add_all(clothings)
         db.session.commit()
-        print('Clothings created...')
+        print('Clothings created.')
 
         # Create Custom records
         print('Creating customs...')
@@ -79,9 +80,21 @@ if __name__ == '__main__':
             new_custom = Custom(
                 notes = fake.sentence(nb_words=randint(0, 250)),
             )
-        print('Customs created...')
+        print('Customs created.')
 
         # Create Blog records
         print('Creating blogs...')
+        blogs = []
+        for _ in range(10):
+            blog_title = fake.sentence(nb_words=randint(1, 8))
+            blog_body = ' '.join(fake.sentences(nb=randint(5, 50)))
+            new_blog = Blog(
+                title=blog_title,
+                body=blog_body
+            )
+            blogs.append(new_blog)
+        db.session.add_all(blogs)
+        db.session.commit()
+        print('Blogs created.')
 
-        print('Blogs created...')
+        print('Seed complete.')
