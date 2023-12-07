@@ -20,6 +20,7 @@ if __name__ == '__main__':
         db.session.commit()
         print('DB records cleared...')
         
+        # Create User records
         print('Creating users')
         def generate_random_string(min, max):
             characters = string.ascii_letters + string.digits
@@ -33,7 +34,7 @@ if __name__ == '__main__':
             name = 'Admin'
         )
         user_admin.password_hash = 'admin'
-        for i in range(5):
+        for i in range(100):
             password = generate_random_string(8, 50)
             new_user = User(
                 username = generate_random_string(5, 15),
@@ -45,3 +46,42 @@ if __name__ == '__main__':
         db.session.add_all(users + [user_admin])
         db.session.commit()
         print('Users created...')
+
+        # Create clothing records
+        print('Creating clothings...')
+        clothings = []
+        decimals = [0.00, 0.25, 0.50, 0.75]
+        clothing_ranges = {
+            'bottom': {'inseam': (0, 40), 'waist': (0, 60), 'hips': (0, 60)},
+            'top': {'chest': (0, 75), 'waist': (0, 60)},
+            'dress': {'chest': (0, 75), 'waist': (0, 60), 'hips': (0, 60)},
+            'accessory': {},
+            'outwear': {'chest': (0, 75), 'waist': (0, 60)}
+        }
+        for i in range(75):
+            random_type = rc(list(clothing_ranges.keys()))
+            new_clothing = Clothing(
+                name = fake.first_name(),
+                type = random_type,
+            )
+            new_clothing_ranges = clothing_ranges.get(random_type, {})
+            for attr, (min, max) in new_clothing_ranges.items():
+                setattr(new_clothing, attr, randint(min, max) + rc(decimals))
+            clothings.append(new_clothing)
+        db.session.add_all(clothings)
+        db.session.commit()
+        print('Clothings created...')
+
+        # Create Custom records
+        print('Creating customs...')
+        customs = []
+        for i in range(20):
+            new_custom = Custom(
+                notes = fake.sentence(nb_words=randint(0, 250)),
+            )
+        print('Customs created...')
+
+        # Create Blog records
+        print('Creating blogs...')
+
+        print('Blogs created...')
