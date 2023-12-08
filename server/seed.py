@@ -30,17 +30,17 @@ if __name__ == '__main__':
             return random_string
         users = []
         user_admin = User(
-            username = 'admin',
-            email = 'admin@fake.com',
-            name = 'Admin'
+            username='admin',
+            email='admin@fake.com',
+            name='Admin'
         )
         user_admin.password_hash = 'admin'
         for i in range(100):
             password = generate_random_string(8, 50)
             new_user = User(
-                username = generate_random_string(5, 15),
-                email = fake.email(),
-                name = fake.name(),
+                username=generate_random_string(5, 15),
+                email=fake.email(),
+                name=fake.name(),
             )
             new_user.password_hash = password
             users.append(new_user)
@@ -62,8 +62,8 @@ if __name__ == '__main__':
         for i in range(75):
             random_type = rc(list(clothing_ranges.keys()))
             new_clothing = Clothing(
-                name = fake.first_name(),
-                type = random_type,
+                name=fake.first_name(),
+                type=random_type,
             )
             new_clothing_ranges = clothing_ranges.get(random_type, {})
             for attr, (min, max) in new_clothing_ranges.items():
@@ -78,8 +78,13 @@ if __name__ == '__main__':
         customs = []
         for i in range(20):
             new_custom = Custom(
-                notes = fake.sentence(nb_words=randint(0, 250)),
+                notes=fake.sentence(nb_words=randint(0, 250)),
+                user=rc(users),
+                clothing=rc(clothings)
             )
+            customs.append(new_custom)
+        db.session.add_all(customs)
+        db.session.commit()
         print('Customs created.')
 
         # Create Blog records
