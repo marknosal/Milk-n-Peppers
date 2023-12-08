@@ -15,7 +15,6 @@ export default function Login () {
                         Sign Up!
                     </button>
                 </div>
-
             ) : (
                 <div>
                     <SignupForm />
