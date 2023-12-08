@@ -16,6 +16,7 @@ class Clothing(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     type = db.Column(db.String, nullable=False)
+    price = db.Column(db.Float, default=0.00)
     inseam = db.Column(db.Float)
     chest = db.Column(db.Float)
     waist = db.Column(db.Float)

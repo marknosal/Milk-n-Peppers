@@ -64,6 +64,7 @@ if __name__ == '__main__':
             new_clothing = Clothing(
                 name=fake.first_name(),
                 type=random_type,
+                price=randint(10, 350) + 0.99,
             )
             new_clothing_ranges = clothing_ranges.get(random_type, {})
             for attr, (min, max) in new_clothing_ranges.items():
