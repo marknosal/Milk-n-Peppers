@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import Error from "../Error";
 
 export default function LoginForm () {
+    const [error, setError] = useState(null)
 
     const valSchema = yup.object().shape({
         username: yup.string().required('Must exist'),
@@ -27,6 +29,10 @@ export default function LoginForm () {
                 if (response.ok) {
                     response.json().then(data => {
                         // login user
+                    })
+                } else {
+                    response.json().then(data => {
+                        setError(data)
                     })
                 }
             })
@@ -61,6 +67,7 @@ export default function LoginForm () {
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <Error error={error} />
         </div>
     )
 }
