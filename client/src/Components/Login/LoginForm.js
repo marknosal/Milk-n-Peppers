@@ -31,6 +31,7 @@ export default function LoginForm () {
                 if (response.ok) {
                     response.json().then(data => {
                         login(data)
+                        setError(null)
                     })
                 } else {
                     response.json().then(data => {
