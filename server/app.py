@@ -48,6 +48,7 @@ class Login(Resource):
         except Exception as e:
             return {'error': str(e)}, 401
 
+api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 
 if __name__ == '__main__':
