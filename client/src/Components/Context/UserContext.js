@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import Login from "../Login/Login";
+
 
 const UserContext = createContext({})
 
@@ -29,3 +29,5 @@ function UserProvider ({ children }) {
         <UserContext.Provider value = {{ user, setUser, login, logout }}>{children}</UserContext.Provider>
     )
 }
+
+export { UserContext, UserProvider }
