@@ -1,6 +1,7 @@
 client/node_modules/.cache/default-development/1.pack
 client/node_modules/typescript/lib/lib.es2022.string.d.ts
 client/node_modules
+client/node_modules/.cache/default-development
 server/models/__pycache__
-.eslintcache
+*.eslintcache
 *.pack
