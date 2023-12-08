@@ -48,8 +48,30 @@ class Login(Resource):
         except Exception as e:
             return {'error': str(e)}, 401
 
+class Signup(Resource):
+    def post(self):
+        data = request.get_json()
+        try:
+            user = User.query.filter_by(username=data.get('username')).one_or_none()
+            if not user:
+                new_user = User()
+                for key, value in data.items():
+                    setattr(new_user, key, value)
+                new_user.password_hash = data.get('password')
+                delattr(new_user, 'passwordConfirm')
+                db.session.add(new_user)
+                db.session.commit()
+                return new_user.to_dict(), 202
+            return {'error': f'Username already exists'}, 422
+        
+        except Exception as e:
+            return {'error': str(e)}, 422
+            
+
+
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(Signup, '/signup', endpoint='signup')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

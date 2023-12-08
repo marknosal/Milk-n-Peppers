@@ -51,6 +51,7 @@ export default function SignupForm () {
                 } else {
                     response.json().then(data => {
                         setError(data)
+                        console.log('not ok')
                     })
                 }
             })
@@ -112,7 +113,8 @@ export default function SignupForm () {
                         id = 'passwordConfirm'
                         name = 'passwordConfirm'
                         autoComplete = 'new-password'
-                        onChange = {formik.values.passwordConfirm}
+                        onChange = {formik.handleChange}
+                        value = {formik.values.passwordConfirm}
                     />
                     <p>{formik.errors.passwordConfirm}</p>
                 </div>
