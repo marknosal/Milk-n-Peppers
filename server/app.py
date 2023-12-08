@@ -23,6 +23,13 @@ def check_if_logged_in():
     ]
     if request.endpoint not in open_access_list and not session.get('user_id'):
         abort(401, 'Unauthorized')
+
+class CheckSession(Resource):
+    def get(self):
+        user = User.query.filter(User.id == session.get('user_id')).one_or_none()
+        if user:
+            return user.to_dict(), 200
+        return {}, 401
         
 class Login(Resource):
     def post(self):
