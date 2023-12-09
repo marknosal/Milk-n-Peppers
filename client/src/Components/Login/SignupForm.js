@@ -34,7 +34,7 @@ export default function SignupForm () {
             passwordConfirm: '',
         },
         validationSchema: signupSchema,
-        onSubmit: values => {
+        onSubmit: (values, { resetForm }) => {
             fetch('/signup', {
                 method: 'POST',
                 headers: {
@@ -47,11 +47,12 @@ export default function SignupForm () {
                     response.json().then(data => {
                         login(data)
                         setError(null)
+                        resetForm()
                     })
                 } else {
                     response.json().then(data => {
                         setError(data)
-                        console.log('not ok')
+                        resetForm()
                     })
                 }
             })

@@ -19,7 +19,7 @@ export default function LoginForm () {
             password: '',
         },
         validationSchema: valSchema,
-        onSubmit: values => {
+        onSubmit: (values, { resetForm }) => {
             fetch('/login', {
                 method: 'POST',
                 headers: {
@@ -32,10 +32,12 @@ export default function LoginForm () {
                     response.json().then(data => {
                         login(data)
                         setError(null)
+                        resetForm()
                     })
                 } else {
                     response.json().then(data => {
                         setError(data)
+                        resetForm()
                     })
                 }
             })

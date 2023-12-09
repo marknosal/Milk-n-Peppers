@@ -5,3 +5,6 @@ client/node_modules/.cache/default-development
 server/models/__pycache__
 *.eslintcache
 *.pack
+client/node_modules/.cache/.eslintcache
+client/node_modules/.cache/default-development/10.pack
+client/node_modules/.cache/default-development/*.pack
