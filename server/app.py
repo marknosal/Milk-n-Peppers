@@ -66,12 +66,19 @@ class Signup(Resource):
         
         except Exception as e:
             return {'error': str(e)}, 422
+
+class Blogs(Resource):
+    def get(self):
+        blogs = Blog.query.all()
+        blogs_dict = [b.to_dict() for b in blogs]
+        return blogs_dict, 200
             
 
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Signup, '/signup', endpoint='signup')
+api.add_resource(Blogs, '/blogs', endpoint='blogs')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

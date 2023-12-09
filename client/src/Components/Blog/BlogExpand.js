@@ -1,9 +1,10 @@
 
 export default function BlogExpand ({ blog, onMinimize }) {
+    console.log(blog)
     return (
         <div>
-            Expanded Blog {blog.id}
-            <button onClick={onMinimize}>X</button>
+            <h2>{blog.title}</h2>
+            <button onClick={() => onMinimize()}>X</button>
         </div>
     )
 }
