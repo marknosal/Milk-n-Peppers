@@ -1,12 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Blog () {
+    const [blogs, setBlogs] = useState([])
+
     useEffect(() => {
         fetch('/blogs').then(response => {
-            response.json().then(data =>)
+            response.json().then(data => {
+                setBlogs(data)
+            })
         })
     }, [])
+
     return (
-        <div>Blog</div>
+        <div className="blog">
+            <h1>Dayna's Blog:</h1>
+        </div>
     )
 }
