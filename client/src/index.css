@@ -38,3 +38,13 @@
 .login {
     margin: auto;
 }
+
+.blog {
+    margin-top: 10px;
+    margin-bottom: auto;
+    margin-left: 10px;
+    margin-right: auto;
+}
+.blog button {
+    margin-right: auto;
+}

@@ -1,9 +1,11 @@
+import React from "react"
 
 export default function BlogExpand ({ blog, onMinimize }) {
-    console.log(blog)
+
     return (
         <div>
             <h2>{blog.title}</h2>
+            <p>{blog.body}</p>
             <button onClick={() => onMinimize()}>X</button>
         </div>
     )

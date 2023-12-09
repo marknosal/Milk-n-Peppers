@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BlogCard from './BlogCard';
 import BlogExpand from "./BlogExpand";
+import '../../index.css'
 
 export default function Blog () {
     const [blogs, setBlogs] = useState([])
@@ -16,7 +17,7 @@ export default function Blog () {
 
     function handleExpand(id) {
         if (id) {
-            const blog = blogs.filter(b => b.id === id)
+            const blog = blogs.find(b => b.id === id)
             setExpandedBlog(blog)
         } else {
             setExpandedBlog(null)
@@ -25,11 +26,12 @@ export default function Blog () {
 
     return (
         <div className="blog">
+            <h1>Dayna's Blog:</h1>
+            {expandedBlog && <button onClick={() => handleExpand(null)}>X</button>}
             {expandedBlog ? (
                 <BlogExpand blog={expandedBlog} onMinimize={handleExpand}  />
             ) : (
                 <div className="blog-list">
-                    <h1>Dayna's Blog:</h1>
                     <ul>
                         {blogs.map(blog => {
                             return (
