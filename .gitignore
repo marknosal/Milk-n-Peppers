@@ -65,3 +65,9 @@ client/node_modules/.cache/.eslintcache
 
 # Ignore specific .pack files in client/node_modules/.cache/default-development/
 client/node_modules/.cache/default-development/*.pack
+
+.DS_Store
+.vscode
+*.log
+logs/
+node_modules/
