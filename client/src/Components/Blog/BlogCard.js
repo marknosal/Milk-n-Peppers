@@ -1,5 +1,10 @@
-export default function BlogCard ({ blog }) {
+export default function BlogCard ({ blog, onExpand }) {
+    function handleClick() {
+        onExpand(blog.id)
+    }
     return (
-        <h2>{blog.title}</h2>
+        <div onClick={handleClick}>
+            <h2>{blog.title}</h2>
+        </div>
     )
 }

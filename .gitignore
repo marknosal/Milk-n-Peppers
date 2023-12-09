@@ -59,3 +59,5 @@ client/node_modules/.cache/.eslintcache
 client/node_modules/.cache/.eslintcache
 client/node_modules/.cache/default-development/5.pack
 client/node_modules/.cache/default-development/index.pack
+client/node_modules/.cache/.eslintcache
+client/node_modules/.cache/default-development/*.pack
