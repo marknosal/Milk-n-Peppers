@@ -22,6 +22,8 @@ build/Release
 
 # Dependency directories
 client/node_modules
+client/node_modules/.cache
+client/node_modules/.cache/default-development
 node_modules
 jspm_packages
 
@@ -53,3 +55,7 @@ jspm_packages
 .pytest_cache
 
 __pycache__
+client/node_modules/.cache/.eslintcache
+client/node_modules/.cache/.eslintcache
+client/node_modules/.cache/default-development/5.pack
+client/node_modules/.cache/default-development/index.pack
