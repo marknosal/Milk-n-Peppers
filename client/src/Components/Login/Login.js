@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+import'../../index.css'
 
 export default function Login () {
     const [showLogin, setShowLogin] = useState(true)
