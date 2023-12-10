@@ -57,7 +57,8 @@ if __name__ == '__main__':
             'top': {'chest': (0, 75), 'waist': (0, 60)},
             'dress': {'chest': (0, 75), 'waist': (0, 60), 'hips': (0, 60)},
             'accessory': {},
-            'outwear': {'chest': (0, 75), 'waist': (0, 60)}
+            'shoe': {},
+            'outerwear': {'chest': (0, 75), 'waist': (0, 60)}
         }
         for i in range(75):
             random_type = rc(list(clothing_ranges.keys()))
