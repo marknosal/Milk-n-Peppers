@@ -72,6 +72,12 @@ class Blogs(Resource):
         blogs = Blog.query.all()
         blogs_dict = [b.to_dict() for b in blogs]
         return blogs_dict, 200
+    
+class Clothings(Resource):
+    def get(self):
+        clothings = Clothing.query.all()
+        clothings_dict = [c.to_dict() for c in clothings]
+        return clothings_dict, 200
             
 
 
@@ -79,6 +85,7 @@ api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(Blogs, '/blogs', endpoint='blogs')
+api.add_resource(Clothings, '/clothings', endpoint='clothings')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
