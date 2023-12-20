@@ -45,6 +45,17 @@
     margin-left: 10px;
     margin-right: auto;
 }
+
 .blog button {
     margin-right: auto;
+}
+
+.card-clothing {
+    width: 100px;
+    height: 100px;
+    
+}
+
+.card-container {
+    margin-left: 10px;
 }
