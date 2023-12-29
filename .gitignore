@@ -71,3 +71,4 @@ client/node_modules/.cache/default-development/*.pack
 *.log
 logs/
 node_modules/
+server/__pycache__/config.cpython-39.pyc

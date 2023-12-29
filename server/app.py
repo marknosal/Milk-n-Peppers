@@ -19,7 +19,8 @@ def check_if_logged_in():
         'login',
         'check_session',
         'about',
-        'clothes',
+        'clothings',
+        'profile'
     ]
     if request.endpoint not in open_access_list and not session.get('user_id'):
         abort(401, 'Unauthorized')
@@ -78,6 +79,10 @@ class Clothings(Resource):
         clothings = Clothing.query.all()
         clothings_dict = [c.to_dict() for c in clothings]
         return clothings_dict, 200
+    
+class Profile(Resource):
+    def get(self):
+        return {}, 123
             
 
 
@@ -86,6 +91,7 @@ api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(Blogs, '/blogs', endpoint='blogs')
 api.add_resource(Clothings, '/clothings', endpoint='clothings')
+api.add_resource(Profile, '/profile', endpoint='profile')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
