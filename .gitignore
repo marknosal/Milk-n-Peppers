@@ -54,7 +54,8 @@ jspm_packages
 # pytest cache
 .pytest_cache
 
-__pycache__
+/server/__pycache__
+/server/migrations/__pycache__
 client/node_modules/.cache/.eslintcache
 client/node_modules/.cache/.eslintcache
 client/node_modules/.cache/default-development/5.pack
