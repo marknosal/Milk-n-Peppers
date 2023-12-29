@@ -25,6 +25,7 @@ class Clothing(db.Model, SerializerMixin):
     # relationships
     customs = db.relationship('Custom', back_populates='clothing')
     users = association_proxy('customs', 'user')
+    clothing_image_paths = db.relationship('ClothingImagePath', back_populates='clothing')
     
     def __repr__(self):
         return f'<Clothing: {self.id}. Type: {self.type}.>'
