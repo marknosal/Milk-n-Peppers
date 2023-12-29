@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
-from random import randint, choice as rc;
+from random import randint, choice as rc
+from pathlib import Path
 from faker import Faker
 from app import app
 from config import db, bcrypt
-from models import User, Blog, Custom, Clothing
+from models import User, Blog, Custom, Clothing, ClothingImagePath
 import string
 
 if __name__ == '__main__':
@@ -17,7 +18,7 @@ if __name__ == '__main__':
         User.query.delete()
         Blog.query.delete()
         Custom.query.delete()
-        Clothing.query.delete()
+        # Clothing.query.delete()
         db.session.commit()
         print('DB records cleared.')
         
@@ -49,35 +50,36 @@ if __name__ == '__main__':
         print('Users created.')
 
         # Create clothing records
-        print('Creating clothings...')
-        clothings = []
-        decimals = [0.00, 0.25, 0.50, 0.75]
-        clothing_ranges = {
-            'bottom': {'inseam': (0, 40), 'waist': (0, 60), 'hips': (0, 60)},
-            'top': {'chest': (0, 75), 'waist': (0, 60)},
-            'dress': {'chest': (0, 75), 'waist': (0, 60), 'hips': (0, 60)},
-            'accessory': {},
-            'shoe': {},
-            'outerwear': {'chest': (0, 75), 'waist': (0, 60)}
-        }
-        for i in range(75):
-            random_type = rc(list(clothing_ranges.keys()))
-            new_clothing = Clothing(
-                name=fake.first_name(),
-                type=random_type,
-                price=randint(10, 350) + 0.99,
-            )
-            new_clothing_ranges = clothing_ranges.get(random_type, {})
-            for attr, (min, max) in new_clothing_ranges.items():
-                setattr(new_clothing, attr, randint(min, max) + rc(decimals))
-            clothings.append(new_clothing)
-        db.session.add_all(clothings)
-        db.session.commit()
-        print('Clothings created.')
+        # print('Creating clothings...')
+        # clothings = []
+        # decimals = [0.00, 0.25, 0.50, 0.75]
+        # clothing_ranges = {
+        #     'bottom': {'inseam': (0, 40), 'waist': (0, 60), 'hips': (0, 60)},
+        #     'top': {'chest': (0, 75), 'waist': (0, 60)},
+        #     'dress': {'chest': (0, 75), 'waist': (0, 60), 'hips': (0, 60)},
+        #     'accessory': {},
+        #     'shoe': {},
+        #     'outerwear': {'chest': (0, 75), 'waist': (0, 60)}
+        # }
+        # for i in range(75):
+        #     random_type = rc(list(clothing_ranges.keys()))
+        #     new_clothing = Clothing(
+        #         name=fake.first_name(),
+        #         type=random_type,
+        #         price=randint(10, 350) + 0.99,
+        #     )
+        #     new_clothing_ranges = clothing_ranges.get(random_type, {})
+        #     for attr, (min, max) in new_clothing_ranges.items():
+        #         setattr(new_clothing, attr, randint(min, max) + rc(decimals))
+        #     clothings.append(new_clothing)
+        # db.session.add_all(clothings)
+        # db.session.commit()
+        # print('Clothings created.')
 
         # Create Custom records
         print('Creating customs...')
         customs = []
+        clothings = Clothing.query.all()
         for i in range(20):
             new_custom = Custom(
                 notes=fake.sentence(nb_words=randint(0, 250)),
@@ -103,5 +105,20 @@ if __name__ == '__main__':
         db.session.add_all(blogs)
         db.session.commit()
         print('Blogs created.')
+
+        # Create ClothingImagePath records
+        # print('Creating clothing image paths')
+        # img_paths = []
+        # jpg_images_dir = Path("static/images")
+        # jpg_images = list(jpg_images_dir.glob('*.jpg'))
+        # for jpgfile in jpg_images:
+        #     full_path = f'static/images/{jpgfile.name}'
+        #     # print(full_path)
+        #     new_img_path = ClothingImagePath(
+        #         image_path=full_path,
+        #     )
+        #     img_paths.append(new_img_path)
+        # db.session.add_all(img_paths)
+        # db.session.commit()
 
         print('Seed complete.')
