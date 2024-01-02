@@ -10,7 +10,7 @@ from config import db, bcrypt
 class Clothing(db.Model, SerializerMixin):
     __tablename__ = 'clothings'
 
-    serialize_rules = ('-customs.clothing',)
+    serialize_rules = ('-customs.clothing', '-clothing_image_paths.clothing',)
 
     # columns
     id = db.Column(db.Integer, primary_key=True)

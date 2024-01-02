@@ -55,6 +55,7 @@ jspm_packages
 .pytest_cache
 
 /server/__pycache__
+/server/models/__pycache__
 /server/migrations/__pycache__
 client/node_modules/.cache/.eslintcache
 client/node_modules/.cache/.eslintcache
