@@ -10,9 +10,10 @@ export default function Clothes () {
     useEffect(() => {
         fetch('/clothings').then(r=>r.json()).then(d=>setClothings(d))
     }, [])
+    const expandedClothing = clothings.find(c => c.id === expandClothingId)
 
     return expandClothingId ? (
-        <ExpandedClothing clothing={ExpandedClothing} />
+        <ExpandedClothing clothing={expandedClothing} minimizeClothing={() => setExpandClothingId(null)} />
     ) : (
         <Container className="card-container" fluid>
             <h2>Clothes</h2>

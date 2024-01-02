@@ -61,3 +61,17 @@
     padding-left: 20px; /* Add left padding */
     width: 100%;
 }
+
+.container {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    margin: 10px;
+}
+
+.x-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}

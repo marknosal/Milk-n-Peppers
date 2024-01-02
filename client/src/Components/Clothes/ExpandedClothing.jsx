@@ -1,7 +1,10 @@
 import React from "react";
 
-export default function ExpandedClothing ({ clothing }) {
+export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     return (
-        <h1>EXPAND</h1>
+        <div className='container'>
+            <h1>{clothing.name}</h1>
+            <button className='x-button' onClick={minimizeClothing}>X</button>
+        </div>
     )
 }
