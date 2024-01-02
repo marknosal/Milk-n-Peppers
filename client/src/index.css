@@ -25,7 +25,6 @@
 
 .side-banner-link {
     display: flex;
-    /* change width to make links wider if they overlap */
     width: 100px;
     padding: 12px;
     margin: 0 6px 6px;
@@ -57,7 +56,7 @@
 
 .card-container {
     margin: 20px;
-    padding-left: 20px; /* Add left padding */
+    padding-left: 20px;
     width: 100%;
 }
 
@@ -77,21 +76,21 @@
 .image-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center the content horizontally */
+    justify-content: center; 
 }
 
 
 .expanded-image {
-    width: 95%; /* Ensure the image takes up the full width of the container */
-    max-width: 100%; /* Ensure the image doesn't exceed its natural size */
-    margin: 10px; /* Adjust the margin based on your preference */
+    width: 95%;
+    max-width: 100%;
+    margin: 10px; 
     border-radius: 100px;
 }
 
 .options-container {
     position: sticky;
-    top: 0; /* Adjust this value based on your layout */
-    z-index: 999; /* Set a high z-index to ensure it stays on top of other elements */
+    top: 0; 
+    z-index: 999; 
     padding-right: 20px;
 }
 
@@ -99,18 +98,18 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    z-index: 3; /* Place X button on top */
+    z-index: 3; 
 }
 
 .expanded-clothing-list {
     position: absolute;
     right: 10px;
-    z-index: 2; /* Place list in the middle */
+    z-index: 2; 
 }
 
 .add-cart-button {
     position: absolute;
     right: 10px;
-    z-index: 1; /* Place Add to Cart button at the bottom */
-    margin-top: 10px; /* Add a margin to prevent overlapping with the list */
+    z-index: 1; 
+    margin-top: 10px; 
 }
