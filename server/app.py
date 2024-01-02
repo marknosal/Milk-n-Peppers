@@ -88,8 +88,7 @@ class ClothingImagesById(Resource):
     def get(self, id):
         try:
             image_paths = ClothingImagePath.query.filter_by(clothing_id=id).all()
-            img_path_dict = [p.to_dict(only=('image_path',)) for p in image_paths]
-            print(img_path_dict)
+            img_path_dict = [p.to_dict(only=('id', 'image_path',)) for p in image_paths]
             return img_path_dict, 200
         except:
             return { 'error': 'image_paths not found' }, 404

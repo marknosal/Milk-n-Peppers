@@ -67,7 +67,7 @@
     right: 50%;
 }
 
-.container {
+.expanded-image-container {
     position: relative;
     display: flex;
     flex-grow: 1;
@@ -75,12 +75,20 @@
 }
 
 .x-button {
-    position: absolute;
-    top: 0;
-    right: 0;
+    float: right;
 
 }
 
 .image-container {
-    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the content horizontally */
 }
+  
+.expanded-image {
+    width: 95%; /* Ensure the image takes up the full width of the container */
+    max-width: 100%; /* Ensure the image doesn't exceed its natural size */
+    margin: 10px; /* Adjust the margin based on your preference */
+    border-radius: 100px;
+}
+
