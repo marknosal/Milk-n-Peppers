@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Error from "../Error";
+import "../../index.css";
 
 export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     const [imgPaths, setImgPaths] = useState([])
@@ -29,8 +30,10 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     ) : (
         <div className='container'>
             <h1 className="clothing-title">{clothing.name}</h1>
-            <button className='x-button' onClick={minimizeClothing}>X</button>
-            <p>{images}</p>
+            <button className='x-button' onClick={minimizeClothing}>
+                X
+            </button>
+            <div className="image-container">{images}</div>
         </div>
     )
 }
