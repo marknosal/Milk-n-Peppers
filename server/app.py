@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 import datetime
 
 from config import app, db, api
-from models import User, Clothing, Blog, Custom
+from models import User, Clothing, Blog, Custom, ClothingImagePath
 
 @app.route('/')
 def index():
@@ -84,6 +84,15 @@ class Profile(Resource):
     def get(self):
         return {}, 123
             
+class ClothingImagesById(Resource):
+    def get(self, id):
+        try:
+            image_paths = ClothingImagePath.query.filter_by(clothing_id=id).all()
+            img_path_dict = [p.to_dict(only=('image_path',)) for p in image_paths]
+            print(img_path_dict)
+            return img_path_dict, 200
+        except:
+            return { 'error': 'image_paths not found' }, 404
 
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -92,6 +101,7 @@ api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(Blogs, '/blogs', endpoint='blogs')
 api.add_resource(Clothings, '/clothings', endpoint='clothings')
 api.add_resource(Profile, '/profile', endpoint='profile')
+api.add_resource(ClothingImagesById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

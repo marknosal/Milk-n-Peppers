@@ -62,6 +62,11 @@
     width: 100%;
 }
 
+.clothing-title {
+    position: absolute;
+    right: 50%;
+}
+
 .container {
     position: relative;
     display: flex;
