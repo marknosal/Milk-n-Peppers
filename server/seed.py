@@ -84,7 +84,8 @@ if __name__ == '__main__':
             new_custom = Custom(
                 notes=fake.sentence(nb_words=randint(0, 250)),
                 user=rc(users),
-                clothing=rc(clothings)
+                clothing=rc(clothings),
+                purchased=False
             )
             customs.append(new_custom)
         db.session.add_all(customs)

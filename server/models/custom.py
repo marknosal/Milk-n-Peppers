@@ -15,6 +15,7 @@ class Custom(db.Model, SerializerMixin):
     # columns
     id = db.Column(db.Integer, primary_key=True)
     notes = db.Column(db.String)
+    purchased = db.Column(db.Boolean, default=False, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     clothing_id = db.Column(db.Integer, db.ForeignKey('clothings.id'))
