@@ -8,7 +8,7 @@ export default function Clothes () {
     const [clothings, setClothings] = useState([])
     const [expandClothingId, setExpandClothingId] = useState(null)
     useEffect(() => {
-        fetch('/clothings').then(r=>r.json()).then(d=>setClothings(d))
+        fetch('/clothes').then(r=>r.json()).then(d=>setClothings(d))
     }, [])
     const expandedClothing = clothings.find(c => c.id === expandClothingId)
 

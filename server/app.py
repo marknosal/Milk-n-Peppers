@@ -16,13 +16,14 @@ def index():
 def check_if_logged_in():
     open_access_list = [
         'signup',
+        'home',
         'login',
+        'about',
         'check_session',
         'about',
-        'clothings',
-        'profile'
+        'clothes',  
     ]
-    if request.endpoint not in open_access_list and not session.get('user_id'):
+    if not request.path.startswith('/static') and request.endpoint not in open_access_list and not session.get('user_id'):
         abort(401, 'Unauthorized')
 
 class CheckSession(Resource):
@@ -98,7 +99,7 @@ api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(Blogs, '/blogs', endpoint='blogs')
-api.add_resource(Clothings, '/clothings', endpoint='clothings')
+api.add_resource(Clothings, '/clothes', endpoint='clothes')
 api.add_resource(Profile, '/profile', endpoint='profile')
 api.add_resource(ClothingImagesById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path')
 
