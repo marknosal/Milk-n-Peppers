@@ -21,6 +21,7 @@ class Clothing(db.Model, SerializerMixin):
     chest = db.Column(db.Float)
     waist = db.Column(db.Float)
     hips = db.Column(db.Float)
+    description = db.Column(db.String)
 
     # relationships
     customs = db.relationship('Custom', back_populates='clothing')

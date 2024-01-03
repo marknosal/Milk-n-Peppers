@@ -1,3 +1,5 @@
+@import 'semantic-ui-css/semantic.min.css';
+
 .app-container {
     display: flex;
     flex-direction: column;
@@ -91,7 +93,7 @@
     position: sticky;
     top: 0; 
     z-index: 999; 
-    padding-right: 20px;
+    padding: 20px;
 }
 
 .x-button {
@@ -109,7 +111,10 @@
 
 .add-cart-button {
     position: absolute;
-    right: 10px;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
     z-index: 1; 
     margin-top: 10px; 
+    font-size: 32px;
 }

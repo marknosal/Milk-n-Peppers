@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid, Button, Header, Image} from "semantic-ui-react";
+import { Container, Grid, Button, Header, Image } from "semantic-ui-react";
 import Error from "../Error";
 import ExpandedClothingList from "./ExpandedClothingList"
 import "../../index.css";
@@ -44,17 +44,20 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
             <Grid columns={2} divided>
                 <Grid.Row>
                     <Grid.Column width={10}>
-                        <div className="image-container">
+                        <Container className="image-container">
                             {images}
-                        </div>
+                        </Container>
                     </Grid.Column>
                     <Grid.Column width={6}>
-                        <div className="options-container">
+                        <Container className="options-container">
                             <Header as='h1' textAlign="center">{clothing.name}</Header>
-                            <Button className='x-button' onClick={minimizeClothing} secondary>X</Button>
+                            <Button className='x-button' onClick={minimizeClothing}>X</Button>
+                            <Container textAlign="justified">
+                                <p style={{ lineHeight: '1.6', fontSize: '1.2em', letterSpacing: '0.5px', textIndent: '40px' }}>{clothing.description}</p>
+                            </Container>
                             <ExpandedClothingList className='expanded-clothing-list' clothing={clothing} />
-                            <Button className="add-cart-button" primary>Add to Cart</Button>
-                        </div>
+                            <Button className="add-cart-button" size="huge" primary>Add to Cart</Button>
+                        </Container>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
