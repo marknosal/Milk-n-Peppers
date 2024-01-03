@@ -1,13 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
-export default function SideBanner () {
+export default function SideBanner ({ navLinks }) {
     function capitalizeFirstLetter(str) {
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
-    function genNavLinks(linkList) {
+    function genNavLinks(navLinks) {
 
-        const allNavLinks = linkList.map((linkString, index) => (
+        const allNavLinks = navLinks.map((linkString, index) => (
                 <NavLink
                     key = {index}
                     className = 'side-banner-link'
@@ -23,7 +23,7 @@ export default function SideBanner () {
 
     return (
         <div className='side-banner'>
-            {genNavLinks(['home', 'login', 'profile', 'about', 'blog', 'clothes', 'requests'])}
+            {genNavLinks(navLinks)}
         </div>
     )
 }

@@ -8,13 +8,12 @@ import Profile from '../Profile/Profile'
 import About from '../About/About'
 import Blog from '../Blog/Blog'
 import Clothes from '../Clothes/Clothes'
-import Requests from '../Requests/Requests'
 
-export default function Main() {
+export default function Main({ routeLinks }) {
 
-    function genAllRoutes(routeList) {
-        const allRoutes = routeList.map((routeString, index) => (
-            <Route key={index} exact path={routeString === 'Home' ? '/' : `/${routeString}`}>
+    function genAllRoutes(routeLinks) {
+        const allRoutes = routeLinks.map((routeString, index) => (
+            <Route key={index} exact path={routeString === 'home' ? '/' : `/${routeString}`}>
                 {getComponentForRoute(routeString)}
             </Route>
         ))
@@ -22,20 +21,18 @@ export default function Main() {
     }
     function getComponentForRoute(routeString) {
         switch (routeString) {
-            case 'Home':
+            case 'home':
                 return <Home />;
-            case 'Login':
+            case 'login':
                 return <Login />;
-            case 'Profile':
+            case 'profile':
                 return <Profile />;
-            case 'About':
+            case 'about':
                 return <About />;
-            case 'Blog':
+            case 'blog':
                 return <Blog />;
-            case 'Clothes':
+            case 'clothes':
                 return <Clothes />;
-            case 'Requests':
-                return <Requests />;
             default:
                 return null;
 
@@ -45,7 +42,7 @@ export default function Main() {
     return (
         <div className='main-container'>
             <Switch>
-                {genAllRoutes(['Home', 'Login', 'Profile', 'About', 'Blog', 'Clothes', 'Requests'])}
+                {genAllRoutes(routeLinks)}
             </Switch>
         </div>
     )
