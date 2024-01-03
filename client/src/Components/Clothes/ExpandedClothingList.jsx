@@ -12,27 +12,27 @@ export default function ExpandedClothingList({ clothing }) {
       value: clothing[prop],
     }));
 
-    return (
-        <>
-          {nonZeroVals.length > 0 && (
-            <List size='massive'>
-                <ListItem floated='right'>
-                    <ListContent floated='right'>
-                        <strong>Measurements</strong>
-                    </ListContent>
-                </ListItem>
-            </List>
-          )}
-      
-          <List size='huge'>
-            {nonZeroVals.map(({ name, value }) => (
-              <ListItem key={name}>
-                <ListContent floated='right'>
-                  <strong>{name}:</strong> {value}
-                </ListContent>
-              </ListItem>
-            ))}
-          </List>
-        </>
-      );
+  return (
+    <>
+      {nonZeroVals.length > 0 && (
+        <List size='massive'>
+          <ListItem floated='right'>
+            <ListContent floated='right'>
+              <strong>Measurements</strong>
+            </ListContent>
+          </ListItem>
+        </List>
+      )}
+
+      <List size='huge'>
+        {nonZeroVals.map(({ name, value }) => (
+          <ListItem key={name}>
+            <ListContent floated='right'>
+              <strong>{name}:</strong> {value}
+            </ListContent>
+          </ListItem>
+        ))}
+      </List>
+    </>
+  );
 }

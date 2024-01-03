@@ -40,18 +40,18 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     return error ? (
         <Error error={error} />
     ) : (
-        <Container className="expanded-image-container">
+        <Container className="expanded-clothing-container">
             <Grid columns={2} divided>
                 <Grid.Row>
                     <Grid.Column width={10}>
                         <Container className="image-container">
+                            <Button className='x-button' onClick={minimizeClothing}>X</Button>
                             {images}
                         </Container>
                     </Grid.Column>
                     <Grid.Column width={6}>
                         <Container className="options-container">
                             <Header as='h1' textAlign="center">{clothing.name}</Header>
-                            <Button className='x-button' onClick={minimizeClothing}>X</Button>
                             <Container textAlign="justified">
                                 <p style={{ lineHeight: '1.6', fontSize: '1.2em', letterSpacing: '0.5px', textIndent: '40px' }}>{clothing.description}</p>
                             </Container>

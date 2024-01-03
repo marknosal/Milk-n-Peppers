@@ -67,7 +67,7 @@
     right: 50%;
 }
 
-.expanded-image-container {
+.expanded-clothing-container {
     position: relative;
     display: flex;
     flex-grow: 1;
@@ -101,6 +101,9 @@
     top: 10px;
     right: 10px;
     z-index: 3; 
+    padding-left: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 .expanded-clothing-list {
