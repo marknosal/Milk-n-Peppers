@@ -104,6 +104,7 @@
     padding-left: 1px;
     padding-top: 1px;
     padding-bottom: 1px;
+    border: 1px solid darkgrey !important;
 }
 
 .expanded-clothing-list {

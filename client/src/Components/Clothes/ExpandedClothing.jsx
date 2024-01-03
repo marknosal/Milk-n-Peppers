@@ -45,7 +45,7 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                 <Grid.Row>
                     <Grid.Column width={10}>
                         <Container className="image-container">
-                            <Button className='x-button' onClick={minimizeClothing}>X</Button>
+                            <Button className='x-button' size="mini" onClick={minimizeClothing}>X</Button>
                             {images}
                         </Container>
                     </Grid.Column>
