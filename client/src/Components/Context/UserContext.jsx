@@ -1,10 +1,13 @@
 import { createContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 
 const UserContext = createContext({})
 
+
 function UserProvider ({ children }) {
     const [user, setUser] = useState(null)
+    const history = useHistory()
 
     useEffect(() => {
         fetch('/check_session').then(response => {
@@ -20,9 +23,11 @@ function UserProvider ({ children }) {
 
     function login(user) {
         setUser(user)
+        history.push('/profile')
     }
     function logout() {
         setUser(null)
+        history.push('/')
     }
 
     return (
