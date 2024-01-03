@@ -27,7 +27,7 @@ export default function Blog () {
     return (
         <div className="blog">
             <h1>Dayna's Blog:</h1>
-            {expandedBlog && <button onClick={() => handleExpand(null)}>X</button>}
+
             {expandedBlog ? (
                 <BlogExpand blog={expandedBlog} onMinimize={handleExpand}  />
             ) : (
