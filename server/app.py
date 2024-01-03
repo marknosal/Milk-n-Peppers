@@ -12,18 +12,23 @@ from models import User, Clothing, Blog, Custom, ClothingImagePath
 def index():
     return '<h1>Milk n Peppers</h1>'
 
+OPEN_ACCESS_LIST = [
+    'signup',
+    'home',
+    'login',
+    'about',
+    'clothes',
+    'check_session',
+    'clothing_image_path'
+]
+
 @app.before_request
 def check_if_logged_in():
-    open_access_list = [
-        'signup',
-        'home',
-        'login',
-        'about',
-        'check_session',
-        'about',
-        'clothes',  
-    ]
-    if not request.path.startswith('/static') and request.endpoint not in open_access_list and not session.get('user_id'):
+    if (
+        not request.path.startswith('/static') 
+        and request.endpoint not in OPEN_ACCESS_LIST 
+        and 'user_id' not in session
+    ):
         abort(401, 'Unauthorized')
 
 class CheckSession(Resource):

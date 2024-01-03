@@ -14,11 +14,10 @@ export default function App () {
     } else {
         link_list = ['home', 'login', 'clothes', 'about']
     }
-    console.log(link_list)
 
     return (
         <div className='app-container'>
-            <TopBanner title={'Milk n Peppers'} />
+            <TopBanner title={'M I L K + Peppers'} />
             <div className='sidebanner-and-main-container'>
                 <SideBanner navLinks={link_list} />
                 <Main routeLinks={link_list} />
