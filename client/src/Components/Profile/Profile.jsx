@@ -1,15 +1,15 @@
 import React from "react";
-import Logout from "./Logout";
 import "../../index.css"
-
-import { Container } from "semantic-ui-react";
+import { Container, Header, ButtonGroup } from "semantic-ui-react";
 import Cart from "./Cart/Cart";
+import LogoutPortal from "./LogoutPortal";
+
 
 export default function Profile () {
     return (
         <Container className="profile-container">
-            <h2>Profile</h2>
-            <Logout />
+            <LogoutPortal />
+            <Header as='h2'>Profile</Header>
             <Cart />
         </Container>
     )

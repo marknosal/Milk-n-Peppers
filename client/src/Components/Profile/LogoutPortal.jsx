@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../Context/UserContext';
-import { Button, Header, Segment, TransitionablePortal } from 'semantic-ui-react';
+import { Button, ButtonGroup, Header, Segment, TransitionablePortal } from 'semantic-ui-react';
+import "../../index.css"
 
 export default function LogoutPortal() {
     const { logout } = useContext(UserContext);
@@ -12,19 +13,17 @@ export default function LogoutPortal() {
 
     return (
         <TransitionablePortal
-            // closeOnTriggerClick={false}
-            // closeOnDocumentClick={false}
-            // closeOnEscape={false}
             onOpen={handleOpen}
             onClose={handleClose}
             openOnTriggerClick
             open={open}
             trigger={
-                <Button
-                    onClick={()=>setOpen(!open)}
-                    content={"Logout"}
-                    className="logout-button"
-                />
+                    <Button
+                        onClick={()=>setOpen(!open)}
+                        content={"Logout"}
+                        className="logout-button"
+                        floated='right'
+                    />
             }
         >
             <Segment
