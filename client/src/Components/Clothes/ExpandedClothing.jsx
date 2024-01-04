@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Grid, Button, Header, Image } from "semantic-ui-react";
 import Error from "../Error";
 import ExpandedClothingList from "./ExpandedClothingList"
+import { UserContext } from "../Context/UserContext"
 import "../../index.css";
 
 export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     const [imgPaths, setImgPaths] = useState([])
     const [error, setError] = useState(null)
+    const { user, addToCart } = useContext(UserContext)
 
     useEffect(() => {
         fetch(`/clothing_image_path/${clothing.id}`)
@@ -36,6 +38,11 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
         )
     })
 
+    const handleClick = () => {
+
+    }
+
+    const cartButtonText = user ? 'Add To Cart' : 'Please Login To Purchase'
 
     return error ? (
         <Error error={error} />
@@ -56,7 +63,7 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                                 <p style={{ lineHeight: '1.6', fontSize: '1.2em', letterSpacing: '0.5px', textIndent: '40px' }}>{clothing.description}</p>
                             </Container>
                             <ExpandedClothingList className='expanded-clothing-list' clothing={clothing} />
-                            <Button className="add-cart-button" size="huge" primary>Add to Cart</Button>
+                            <Button className="add-cart-button" size="huge" onClick={handleClick} disabled={!user} primary>{cartButtonText}</Button>
                         </Container>
                     </Grid.Column>
                 </Grid.Row>

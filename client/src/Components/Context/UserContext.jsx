@@ -29,9 +29,12 @@ function UserProvider ({ children }) {
         setUser(null)
         history.push('/')
     }
+    function addToCart() {
+
+    }
 
     return (
-        <UserContext.Provider value = {{ user, setUser, login, logout }}>{children}</UserContext.Provider>
+        <UserContext.Provider value = {{ user, setUser, login, logout, addToCart }}>{children}</UserContext.Provider>
     )
 }
 
