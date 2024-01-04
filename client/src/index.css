@@ -113,6 +113,13 @@
     z-index: 2; 
 }
 
+.expanded-clothing-description {
+    line-height: 1.6;
+    font-size: 1.2em;
+    letter-spacing: 0.5px;
+    text-indent: 40px;
+}
+
 .add-cart-button {
     position: absolute;
     left: 50%;
@@ -124,13 +131,11 @@
 }
 
 .profile-container {
-
     display: flex;
     flex-grow: 1;
 }
 
 .logout-button {
-
     top: 0;
     right: 0;
 }

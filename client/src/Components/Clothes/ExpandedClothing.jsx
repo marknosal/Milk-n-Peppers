@@ -52,7 +52,13 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                 <Grid.Row>
                     <Grid.Column width={10}>
                         <Container className="image-container">
-                            <Button className='x-button' size="mini" onClick={minimizeClothing}>X</Button>
+                            <Button 
+                                className='x-button' 
+                                size="mini" 
+                                onClick={minimizeClothing}
+                            >
+                                X
+                            </Button>
                             {images}
                         </Container>
                     </Grid.Column>
@@ -60,10 +66,18 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                         <Container className="options-container">
                             <Header as='h1' textAlign="center">{clothing.name}</Header>
                             <Container textAlign="justified">
-                                <p style={{ lineHeight: '1.6', fontSize: '1.2em', letterSpacing: '0.5px', textIndent: '40px' }}>{clothing.description}</p>
+                                <p className="expanded-clothing-description">{clothing.description}</p>
                             </Container>
                             <ExpandedClothingList className='expanded-clothing-list' clothing={clothing} />
-                            <Button className="add-cart-button" size="huge" onClick={handleClick} disabled={!user} primary>{cartButtonText}</Button>
+                            <Button 
+                                className="add-cart-button" 
+                                size="huge" 
+                                onClick={handleClick} 
+                                disabled={!user} 
+                                primary
+                            >
+                                {cartButtonText}
+                            </Button>
                         </Container>
                     </Grid.Column>
                 </Grid.Row>

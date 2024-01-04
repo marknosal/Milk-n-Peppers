@@ -19,18 +19,20 @@ function UserProvider ({ children }) {
                 setUser(null)
             }
         })
-    }, [setUser])
+    }, [setUser, login])
 
     function login(user) {
+        console.log('login')
         setUser(user)
         history.push('/profile')
     }
     function logout() {
+        console.log('logout')
         setUser(null)
         history.push('/')
     }
     function addToCart() {
-
+        console.log('test')
     }
 
     return (
