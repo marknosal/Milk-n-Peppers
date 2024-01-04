@@ -38,11 +38,6 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
         )
     })
 
-    const handleClick = () => {
-        addToCart(clothing.id)
-    }
-
-    const cartButtonText = user ? 'Add To Cart' : 'Please Login To Purchase'
 
     return error ? (
         <Error error={error} />
@@ -72,11 +67,11 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                             <Button 
                                 className="add-cart-button" 
                                 size="huge" 
-                                onClick={handleClick} 
+                                onClick={() => addToCart(clothing.id)} 
                                 disabled={!user} 
                                 primary
                             >
-                                {cartButtonText}
+                                {user ? 'Add To Cart' : 'Please Login To Purchase'}
                             </Button>
                         </Container>
                     </Grid.Column>
