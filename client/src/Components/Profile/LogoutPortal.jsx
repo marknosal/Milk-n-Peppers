@@ -1,33 +1,27 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../Context/UserContext';
 import { Button, Header, Segment, TransitionablePortal } from 'semantic-ui-react';
-// import { useHistory } from 'react-router-dom';
 
 export default function LogoutPortal() {
     const { logout } = useContext(UserContext);
     const [open, setOpen] = useState(false);
-    const [showPortal, setShowPortal] = useState(false)
-
-    // const history = useHistory()
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const handleCloseClick = () => {
-        setShowPortal(false)
-    }
 
     return (
         <TransitionablePortal
-            closeOnDocumentClick={false}
-            closeOnEscape={false}
+            // closeOnTriggerClick={false}
+            // closeOnDocumentClick={false}
+            // closeOnEscape={false}
             onOpen={handleOpen}
             onClose={handleClose}
             openOnTriggerClick
-            open={showPortal}
+            open={open}
             trigger={
                 <Button
-                    onClick={()=>setShowPortal(!showPortal)}
+                    onClick={()=>setOpen(!open)}
                     content={"Logout"}
                     className="logout-button"
                 />
@@ -38,7 +32,7 @@ export default function LogoutPortal() {
             >
                 <Header>Are you sure you want to logout?</Header>
                 <Button onClick={logout} positive>Yes</Button>
-                <Button onClick={handleCloseClick} negative>No</Button>
+                <Button onClick={() => setOpen(false)} negative>No</Button>
             </Segment>
         </TransitionablePortal>
     );
