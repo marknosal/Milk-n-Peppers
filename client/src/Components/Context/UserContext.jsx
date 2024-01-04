@@ -35,13 +35,14 @@ function UserProvider({ children }) {
     }, [login, setUser]);
 
     function addToCart(clothingId) {
+        console.log(clothingId)
         fetch('/customs', {
             method: 'POST',
             headers: {
-                'Accept': 'json/application',
-                'Content-Type': 'json/application'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(clothingId)
+            body: JSON.stringify({'clothing_id': clothingId})
         }).then(response => response.json())
             .then(data=> console.log(data))
     }

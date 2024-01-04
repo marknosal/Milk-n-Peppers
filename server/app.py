@@ -98,6 +98,30 @@ class ClothingImagesById(Resource):
             return img_path_dict, 200
         except:
             return { 'error': 'image_paths not found' }, 404
+        
+class Customs(Resource):
+    def post(self):
+        data = request.get_json()
+        try:
+            clothing_id = data.get('clothing_id')
+            user_id = session.get('user_id')
+
+            if clothing_id is None or user_id is None:
+                raise ValueError('Missing required fields')
+
+            new_custom = Custom(
+                clothing_id=clothing_id,
+                user_id=user_id,
+                notes=''
+            )
+            db.session.add(new_custom)
+            db.session.commit()
+
+            return new_custom.to_dict(), 201
+        except ValueError as e:
+            return { 'error': str(e) }, 400
+        except Exception:
+            return { 'error': 'An error occurred while processing the request' }, 500
 
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -107,6 +131,7 @@ api.add_resource(Blogs, '/blogs', endpoint='blogs')
 api.add_resource(Clothings, '/clothes', endpoint='clothes')
 api.add_resource(Profile, '/profile', endpoint='profile')
 api.add_resource(ClothingImagesById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path')
+api.add_resource(Customs, '/customs', endpoint='customs')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
