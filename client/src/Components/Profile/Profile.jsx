@@ -8,8 +8,8 @@ import Cart from "./Cart/Cart";
 export default function Profile () {
     return (
         <Container className="profile-container">
+            <h2>Profile</h2>
             <Logout />
-            Profile
             <Cart />
         </Container>
     )

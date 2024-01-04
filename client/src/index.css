@@ -131,11 +131,19 @@
 }
 
 .profile-container {
+    position: relative;
     display: flex;
     flex-grow: 1;
 }
 
 .logout-button {
+    position: absolute;
     top: 0;
     right: 0;
+}
+
+.card-container {
+    display: flex;
+    flex-grow: 1;
+    color: blue;
 }

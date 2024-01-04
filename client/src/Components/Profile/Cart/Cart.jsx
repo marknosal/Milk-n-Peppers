@@ -3,7 +3,7 @@ import { Container } from "semantic-ui-react";
 
 export default function Cart () {
     return (
-        <Container>
+        <Container className="cart-container">
             Cart
         </Container>
     )
