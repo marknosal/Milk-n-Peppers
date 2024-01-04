@@ -1,43 +1,52 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
+const UserContext = createContext({});
 
-const UserContext = createContext({})
+function UserProvider({ children }) {
+    const [user, setUser] = useState(null);
+    const history = useHistory();
 
+    const login = useCallback((user) => {
+        console.log('login');
+        setUser(user);
+        history.push("/profile");
+    }, [history]);    
 
-function UserProvider ({ children }) {
-    const [user, setUser] = useState(null)
-    const history = useHistory()
+    const logout = useCallback(() => {
+        console.log('logout');
+        setUser(null);
+        history.push("/");
+    }, [history]);
 
     useEffect(() => {
-        fetch('/check_session').then(response => {
+        fetch("/check_session").then((response) => {
             if (response.ok) {
-                response.json().then(data => {
-                    login(data)
-                })
+                response.json().then((data) => {
+                    login(data);
+                }).catch((error) => {
+                    console.log(error);
+                });
             } else {
-                setUser(null)
+                setUser(null);
             }
         })
-    }, [setUser, login])
+        .catch((error) => {
+            console.log(error);
+        });
+    }, [login, setUser]);
 
-    function login(user) {
-        console.log('login')
-        setUser(user)
-        history.push('/profile')
-    }
-    function logout() {
-        console.log('logout')
-        setUser(null)
-        history.push('/')
-    }
     function addToCart() {
-        console.log('test')
+        console.log("test");
     }
 
     return (
-        <UserContext.Provider value = {{ user, setUser, login, logout, addToCart }}>{children}</UserContext.Provider>
-    )
+        <UserContext.Provider
+            value={{ user, setUser, login, logout, addToCart }}
+        >
+            {children}
+        </UserContext.Provider>
+    );
 }
 
-export { UserContext, UserProvider }
+export { UserContext, UserProvider };
