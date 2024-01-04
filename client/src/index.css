@@ -122,3 +122,15 @@
     margin-top: 10px; 
     font-size: 32px;
 }
+
+.profile-container {
+
+    display: flex;
+    flex-grow: 1;
+}
+
+.logout-button {
+
+    top: 0;
+    right: 0;
+}

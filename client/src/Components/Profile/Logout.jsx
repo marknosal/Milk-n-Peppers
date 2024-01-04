@@ -6,7 +6,7 @@ import "../../index.css"
 export default function Logout () {
     const { logout } = useContext(UserContext)
     return (
-        <Container>
+        <Container className="logout-button">
             <Button onClick={logout}>Logout</Button>
         </Container>
     )
