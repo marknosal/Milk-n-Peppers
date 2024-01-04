@@ -39,7 +39,7 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     })
 
     const handleClick = () => {
-
+        addToCart(clothing.id)
     }
 
     const cartButtonText = user ? 'Add To Cart' : 'Please Login To Purchase'

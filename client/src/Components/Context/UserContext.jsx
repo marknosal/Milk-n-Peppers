@@ -8,13 +8,11 @@ function UserProvider({ children }) {
     const history = useHistory();
 
     const login = useCallback((user) => {
-        console.log('login');
         setUser(user);
         history.push("/profile");
     }, [history]);    
 
     const logout = useCallback(() => {
-        console.log('logout');
         setUser(null);
         history.push("/");
     }, [history]);
@@ -36,8 +34,16 @@ function UserProvider({ children }) {
         });
     }, [login, setUser]);
 
-    function addToCart() {
-        console.log("test");
+    function addToCart(clothingId) {
+        fetch('/customs', {
+            method: 'POST',
+            headers: {
+                'Accept': 'json/application',
+                'Content-Type': 'json/application'
+            },
+            body: JSON.stringify(clothingId)
+        }).then(response => response.json())
+            .then(data=> console.log(data))
     }
 
     return (
