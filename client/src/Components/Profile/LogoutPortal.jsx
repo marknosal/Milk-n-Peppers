@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../Context/UserContext';
-import { Button, ButtonGroup, Header, Segment, TransitionablePortal } from 'semantic-ui-react';
+import { Button, Header, Segment, TransitionablePortal } from 'semantic-ui-react';
 import "../../index.css"
 
 export default function LogoutPortal() {

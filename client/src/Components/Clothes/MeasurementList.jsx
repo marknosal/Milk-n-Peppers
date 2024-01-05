@@ -3,7 +3,7 @@ import { List, ListContent, ListItem } from 'semantic-ui-react';
 import "../../index.css";
 
 
-export default function ExpandedClothingList({ clothing }) {
+export default function MeasurementList({ clothing }) {
   const propsToMap = ['inseam', 'chest', 'waist', 'hips'];
   const nonZeroVals = propsToMap
     .filter(prop => clothing[prop] !== 0)

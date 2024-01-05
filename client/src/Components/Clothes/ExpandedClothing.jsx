@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Grid, Button, Header, Image } from "semantic-ui-react";
 import Error from "../Error";
-import ExpandedClothingList from "./ExpandedClothingList"
+import MeasurementList from "./MeasurementList"
 import { UserContext } from "../Context/UserContext"
 import "../../index.css";
 
@@ -63,7 +63,7 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                             <Container textAlign="justified">
                                 <p className="expanded-clothing-description">{clothing.description}</p>
                             </Container>
-                            <ExpandedClothingList className='expanded-clothing-list' clothing={clothing} />
+                            <MeasurementList clothing={clothing} />
                             <Button 
                                 className="add-cart-button" 
                                 size="huge" 

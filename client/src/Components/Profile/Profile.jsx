@@ -1,6 +1,6 @@
 import React from "react";
 import "../../index.css"
-import { Container, Header, ButtonGroup } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import Cart from "./Cart/Cart";
 import LogoutPortal from "./LogoutPortal";
 
