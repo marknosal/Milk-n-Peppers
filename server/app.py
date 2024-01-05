@@ -100,6 +100,15 @@ class ClothingImagesById(Resource):
             return { 'error': 'image_paths not found' }, 404
         
 class Customs(Resource):
+    def get(self):
+        try:
+            user_id = session.get('user_id')
+            user = User.query.filter_by(id=user_id).one_or_none()
+            customs = Custom.query.filter(Custom.user_id==user_id).all()
+            return [c.to_dict() for c in customs], 200
+        except:
+            return { 'error': f'{user.username} does not have any customs' }, 404
+
     def post(self):
         data = request.get_json()
         try:
@@ -132,6 +141,7 @@ api.add_resource(Clothings, '/clothes', endpoint='clothes')
 api.add_resource(Profile, '/profile', endpoint='profile')
 api.add_resource(ClothingImagesById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path')
 api.add_resource(Customs, '/customs', endpoint='customs')
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
