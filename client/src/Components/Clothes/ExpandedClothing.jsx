@@ -73,6 +73,7 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                             >
                                 {user ? 'Add To Cart' : 'Please Login To Purchase'}
                             </Button>
+                            <Error error={error} />
                         </Container>
                     </Grid.Column>
                 </Grid.Row>
