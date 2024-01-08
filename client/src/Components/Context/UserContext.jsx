@@ -5,6 +5,7 @@ const UserContext = createContext({});
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [userCart, setUserCart] = useState([])
     const history = useHistory();
 
     const login = useCallback((user) => {
@@ -34,8 +35,13 @@ function UserProvider({ children }) {
         });
     }, [login, setUser]);
 
+    useEffect(() => {
+        fetch('/customs')
+            .then(response => response.json())
+                .then(data => setUserCart(data))
+    }, [])
+
     function addToCart(clothingId) {
-        console.log(clothingId)
         fetch('/customs', {
             method: 'POST',
             headers: {
@@ -44,12 +50,12 @@ function UserProvider({ children }) {
             },
             body: JSON.stringify({'clothing_id': clothingId})
         }).then(response => response.json())
-            .then(data=> console.log(data))
+            .then(data=> setUserCart([...userCart, data]))
     }
 
     return (
         <UserContext.Provider
-            value={{ user, setUser, login, logout, addToCart }}
+            value={{ user, setUser, login, logout, addToCart, userCart }}
         >
             {children}
         </UserContext.Provider>
