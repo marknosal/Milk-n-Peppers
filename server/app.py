@@ -149,6 +149,24 @@ class CustomsById(Resource):
             return {'error': f'Custom {id} does not exist'}, 404
         except Exception as e:
             return { 'error': str(e) }, 400
+        
+    def patch(self, id):
+        data = request.get_json()
+        try:
+            custom = Custom.query.filter_by(id=id).one_or_none()
+            if custom:
+                for key, value in data.items():
+                    setattr(custom, key, value)
+                    db.session.commit()
+
+                    return custom.to_dict(), 200
+                
+            return { 'error': f'Custom {id} not found'}, 404
+        
+        except ValueError as e:
+            return { 'error': str(e) }, 400
+        except Exception:
+            return { 'error': 'An error occurred while processing the request' }, 500
 
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
