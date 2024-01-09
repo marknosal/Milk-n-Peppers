@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Segment, SegmentGroup, Header } from "semantic-ui-react";
+import { Divider, Segment, SegmentGroup, Header } from "semantic-ui-react";
 import "../../index.css"
-import CartImages from "./CartImages";
-// import { UserContext } from "../Context/UserContext";
+import CartItem from "./CartItem";
 
 export default function Cart () {
     // const { user } = useContext(UserContext)
@@ -18,17 +17,7 @@ export default function Cart () {
     
     const cartItems = Array.isArray(cart) && cart.length > 0 ? (
         cart.map(c => (
-            <Segment key={c.id} color="orange" size="massive">
-                <p>{c.clothing.name}</p>
-                <CartImages imagePaths={c.clothing.clothing_image_paths} />
-                <div style={{ marginTop: '1em' }}>
-                    <Button content="Customize" color="orange" />
-                    <Button content="Delete" color="orange" onClick={() => handleDeleteClick(c.id)} />
-                </div>
-                <div style={{ marginBottom: 'auto', padding: '0.5em', textAlign: 'right' }}>
-                    Price: ${c.clothing.price} {/* Assuming the price is accessible from the cart item */}
-                </div>
-            </Segment>
+            <CartItem item={c} onDeleteClick={handleDeleteClick} />
         ))
     ) : (
         <Segment>Cart Empty!</Segment>
