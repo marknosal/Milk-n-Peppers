@@ -15,9 +15,38 @@ export default function Cart () {
     const cartItems = cart.map(c => (
         <Segment key={c.id}>
             {c.clothing.name}
-            <Button floated="right">X</Button>
+            <Button 
+                content="Delete"
+                onClick={(cartId) => handleDeleteClick(cartId)}
+                floated="right"
+            />
         </Segment>
     ))
+
+    function handleDeleteClick(cartId) {
+        fetch(`/customs/${cartId}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                handleDelete(cartId)
+            } else {
+                response.json().then(data => {
+                    console.log(data)
+                })
+            }
+        })
+    }
+
+    function handleDelete(deletedId) {
+        const updatedCart = cart.map(c => (
+            c.id === deletedId ? null : c 
+        ))
+        setCart(updatedCart)
+    }
 
     return (
         <Container className="cart-container">
