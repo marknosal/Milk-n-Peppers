@@ -50,7 +50,7 @@ function UserProvider({ children }) {
             },
             body: JSON.stringify({'clothing_id': clothingId})
         }).then(response => response.json())
-            .then(data=> setUserCart([...userCart, data]))
+            .then(data=> console.log(data))
     }
 
     return (

@@ -117,12 +117,16 @@ class Customs(Resource):
 
             if clothing_id is None or user_id is None:
                 raise ValueError('Missing required fields')
+            
+            user = User.query.filter_by(id=user_id).first()
+            clothing = Clothing.query.filter_by(id=clothing_id).first()
 
-            new_custom = Custom(
-                clothing_id=clothing_id,
-                user_id=user_id,
-                notes=''
-            )
+            existing_custom = Custom.query \
+                .filter_by(user_id=user_id, clothing_id=clothing_id).first()
+            if existing_custom:
+                return { 'error': 'This item is already added to cart' }, 400
+
+            new_custom = user.clothings.creator(clothing, user_id)
             db.session.add(new_custom)
             db.session.commit()
 

@@ -3,6 +3,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import validates
 from datetime import datetime, timedelta
+from .custom import Custom
 import ipdb
 
 from config import db, bcrypt
@@ -21,7 +22,7 @@ class User(db.Model, SerializerMixin):
 
     # relationships
     customs = db.relationship('Custom', back_populates='user')
-    clothings = association_proxy('customs', 'clothing')
+    clothings = association_proxy('customs', 'clothing', creator=lambda clothing_obj, user_id: Custom(clothing_id=clothing_obj.id, user_id=user_id))
 
     @hybrid_property
     def password_hash(self):
