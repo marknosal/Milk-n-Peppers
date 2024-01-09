@@ -17,7 +17,7 @@ export default function App () {
 
     return (
         <div className='app-container'>
-            <TopBanner title={'M I L K + Peppers'} />
+            <TopBanner title={'M i l k + Peppers'} />
             <div className='sidebanner-and-main-container'>
                 <SideBanner navLinks={link_list} />
                 <Main routeLinks={link_list} />

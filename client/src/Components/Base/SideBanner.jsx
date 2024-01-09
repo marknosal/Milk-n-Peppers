@@ -16,6 +16,7 @@ export default function SideBanner ({ navLinks }) {
                     activeStyle = {{ background: 'pink', }}
                 >
                     {capitalizeFirstLetter(linkString)}
+                    {linkString === 'profile' ? '/Cart' : null}
                 </NavLink>
             ))
         return allNavLinks
