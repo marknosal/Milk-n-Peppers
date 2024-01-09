@@ -6,11 +6,9 @@ import "../../index.css";
 
 export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     const [imgPaths, setImgPaths] = useState([])
-    const { user, addToCart, error, setError } = useContext(UserContext)
+    const [buttonContent, setButtonContent] = useState('Add To Cart')
+    const { user } = useContext(UserContext)
 
-    let buttonContent = user ? 'Add To Cart' : 'Please Login To Purchase'
-    if (error) buttonContent = 'Already in cart'
-    
     useEffect(() => {
         fetch(`/clothing_image_path/${clothing.id}`)
             .then(response => {
@@ -19,14 +17,12 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                 }
                 else {
                     response.json().then(data => {
-                        setError(data)
+                        console.log(data)
                     })
                 }
             });
-        return () => {
-            setError(null)
-        }
-    }, [clothing.id, setError])
+
+    }, [clothing.id])
 
     const images = imgPaths.map(imgPath => {
         return (
@@ -38,7 +34,24 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
             />
         )
     })
-
+    
+    function addToCart(clothingId) {
+        fetch('/customs', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'clothing_id': clothingId})
+        }).then(response => {
+            if (response.ok) {
+                setButtonContent('Added!')
+                response.json().then(data => console.log(data))
+            } else {
+                response.json().then(data => setButtonContent(data.error))
+            }
+        })
+    }
 
     return (
         <Container className="expanded-clothing-container">
@@ -64,15 +77,13 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                             </Container>
                             <MeasurementList clothing={clothing} />
                             <Button 
-                                content='test'
+                                content={user ? buttonContent : 'Please Login To Purchase'}
                                 className="add-cart-button" 
                                 size="huge" 
                                 onClick={() => addToCart(clothing.id)} 
                                 disabled={!user} 
                                 primary
-                            >
-                                {buttonContent}
-                            </Button>
+                            />
                         </Container>
                     </Grid.Column>
                 </Grid.Row>
