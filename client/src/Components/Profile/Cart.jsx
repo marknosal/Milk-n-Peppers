@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Divider, Segment, SegmentGroup } from "semantic-ui-react";
+import { Button, Container, Divider, Segment, SegmentGroup, Image } from "semantic-ui-react";
 // import { UserContext } from "../Context/UserContext";
 
 export default function Cart () {
@@ -14,13 +14,24 @@ export default function Cart () {
 
     const cartItems = Array.isArray(cart) && cart.length > 0 ? (
         cart.map(c => (
-            <Segment key={c.id}>
+            <Segment key={c.id} color="orange" size="massive" style={{color: 'orange'}}>
                 {c.clothing.name}
+                <Image 
+                    src={'/' + c.clothing.clothing_image_paths[0].image_path} 
+                    size="small" 
+                />
+                <Button 
+                    content="Customize"
+                    // floated="right"
+                    color="orange"
+                />
                 <Button 
                     content="Delete"
                     onClick={() => handleDeleteClick(c.id)}
-                    floated="right"
+                    // floated="right"
+                    color="orange"
                 />
+
             </Segment>
         ))
     ) : (
