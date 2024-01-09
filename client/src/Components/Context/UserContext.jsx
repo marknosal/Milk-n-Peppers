@@ -6,6 +6,7 @@ const UserContext = createContext({});
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const [userCart, setUserCart] = useState([])
+    const [error, setError] = useState(null)
     const history = useHistory();
 
     const login = useCallback((user) => {
@@ -23,16 +24,11 @@ function UserProvider({ children }) {
             if (response.ok) {
                 response.json().then((data) => {
                     login(data);
-                }).catch((error) => {
-                    console.log(error);
-                });
+                })
             } else {
                 setUser(null);
             }
         })
-        .catch((error) => {
-            console.log(error);
-        });
     }, [login, setUser]);
 
     useEffect(() => {
@@ -49,13 +45,18 @@ function UserProvider({ children }) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({'clothing_id': clothingId})
-        }).then(response => response.json())
-            .then(data=> console.log(data))
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(data => console.log(data))
+            } else {
+                response.json().then(data => setError(data))
+            }
+        })
     }
 
     return (
         <UserContext.Provider
-            value={{ user, setUser, login, logout, addToCart, userCart }}
+            value={{ user, setUser, login, logout, addToCart, userCart, error, setError }}
         >
             {children}
         </UserContext.Provider>

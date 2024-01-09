@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Grid, Button, Header, Image } from "semantic-ui-react";
-import Error from "../Error";
 import MeasurementList from "./MeasurementList"
 import { UserContext } from "../Context/UserContext"
 import "../../index.css";
 
 export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     const [imgPaths, setImgPaths] = useState([])
-    const [error, setError] = useState(null)
-    const { user, addToCart } = useContext(UserContext)
+    const { user, addToCart, error, setError } = useContext(UserContext)
 
     useEffect(() => {
         fetch(`/clothing_image_path/${clothing.id}`)
@@ -25,7 +23,7 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
         return () => {
             setError(null)
         }
-    }, [clothing.id])
+    }, [clothing.id, setError])
 
     const images = imgPaths.map(imgPath => {
         return (
@@ -39,9 +37,7 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     })
 
 
-    return error ? (
-        <Error error={error} />
-    ) : (
+    return (
         <Container className="expanded-clothing-container">
             <Grid columns={2} divided>
                 <Grid.Row>
@@ -71,9 +67,8 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                                 disabled={!user} 
                                 primary
                             >
-                                {user ? 'Add To Cart' : 'Please Login To Purchase'}
+                                {!user ? 'Please Login To Purchase' : !error ? 'Add To Cart' : error.error}
                             </Button>
-                            <Error error={error} />
                         </Container>
                     </Grid.Column>
                 </Grid.Row>

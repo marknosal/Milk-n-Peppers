@@ -124,7 +124,7 @@ class Customs(Resource):
             existing_custom = Custom.query \
                 .filter_by(user_id=user_id, clothing_id=clothing_id).first()
             if existing_custom:
-                return { 'error': 'This item is already added to cart' }, 400
+                return { 'error': 'This item is already in cart' }, 400
 
             new_custom = user.clothings.creator(clothing, user_id)
             db.session.add(new_custom)
