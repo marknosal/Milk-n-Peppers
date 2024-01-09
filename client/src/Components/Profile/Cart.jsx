@@ -1,15 +1,29 @@
-import React, { useContext } from "react";
-import { Container, Divider, Segment, SegmentGroup } from "semantic-ui-react";
-import { UserContext } from "../Context/UserContext";
+import React, { useEffect, useState } from "react";
+import { Button, Container, Divider, Segment, SegmentGroup } from "semantic-ui-react";
+// import { UserContext } from "../Context/UserContext";
 
 export default function Cart () {
-    const { userCart } = useContext(UserContext)
-    console.log(userCart)
+    // const { user } = useContext(UserContext)
+    const [cart, setCart] = useState([])
+
+    useEffect(() =>  {
+        fetch('/customs')
+            .then(response => response.json())
+                .then(data => setCart(data))
+    }, [])
+
+    const cartItems = cart.map(c => (
+        <Segment key={c.id}>
+            {c.clothing.name}
+            <Button floated="right">X</Button>
+        </Segment>
+    ))
+
     return (
         <Container className="cart-container">
             <Divider horizontal>Cart</Divider>
             <SegmentGroup>
-                <Segment>hi</Segment>
+                {cartItems}
             </SegmentGroup>
         </Container>
     )

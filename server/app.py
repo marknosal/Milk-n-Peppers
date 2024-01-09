@@ -105,9 +105,11 @@ class Customs(Resource):
             user_id = session.get('user_id')
             user = User.query.filter_by(id=user_id).one_or_none()
             customs = Custom.query.filter(Custom.user_id==user_id).all()
-            return [c.to_dict() for c in customs], 200
-        except:
+            if customs:
+                return [c.to_dict() for c in customs], 200
             return { 'error': f'{user.username} does not have any customs' }, 404
+        except Exception as e:
+            return { 'error': str(e) }, 400
 
     def post(self):
         data = request.get_json()
