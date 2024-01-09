@@ -12,16 +12,22 @@ export default function Cart () {
                 .then(data => setCart(data))
     }, [])
 
-    const cartItems = cart.map(c => (
-        <Segment key={c.id}>
-            {c.clothing.name}
-            <Button 
-                content="Delete"
-                onClick={(cartId) => handleDeleteClick(cartId)}
-                floated="right"
-            />
-        </Segment>
-    ))
+    const cartItems = Array.isArray(cart) && cart.length > 0 ? (
+        cart.map(c => (
+            <Segment key={c.id}>
+                {c.clothing.name}
+                <Button 
+                    content="Delete"
+                    onClick={() => handleDeleteClick(c.id)}
+                    floated="right"
+                />
+            </Segment>
+        ))
+    ) : (
+        <Segment>Cart Empty!</Segment>
+    );
+      
+
 
     function handleDeleteClick(cartId) {
         fetch(`/customs/${cartId}`, {
@@ -42,8 +48,8 @@ export default function Cart () {
     }
 
     function handleDelete(deletedId) {
-        const updatedCart = cart.map(c => (
-            c.id === deletedId ? null : c 
+        const updatedCart = cart.filter(c => (
+            c.id !== deletedId
         ))
         setCart(updatedCart)
     }

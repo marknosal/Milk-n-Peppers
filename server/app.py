@@ -137,6 +137,18 @@ class Customs(Resource):
             return { 'error': str(e) }, 400
         except Exception:
             return { 'error': 'An error occurred while processing the request' }, 500
+        
+class CustomsById(Resource):
+    def delete(self, id):
+        deleted_custom = Custom.query.filter_by(id=id).one_or_none()
+        try:
+            if deleted_custom:
+                db.session.delete(deleted_custom)
+                db.session.commit()
+                return {}, 204
+            return {'error': f'Custom {id} does not exist'}, 404
+        except Exception as e:
+            return { 'error': str(e) }, 400
 
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -147,6 +159,7 @@ api.add_resource(Clothings, '/clothes', endpoint='clothes')
 api.add_resource(Profile, '/profile', endpoint='profile')
 api.add_resource(ClothingImagesById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path')
 api.add_resource(Customs, '/customs', endpoint='customs')
+api.add_resource(CustomsById, '/customs/<int:id>', endpoint='customs_by_id')
 
 
 if __name__ == '__main__':
