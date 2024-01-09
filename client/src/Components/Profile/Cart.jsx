@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Divider, Segment, SegmentGroup, Header } from "semantic-ui-react";
+import { Button, Divider, Segment, SegmentGroup, Header } from "semantic-ui-react";
 import "../../index.css"
 import CartImages from "./CartImages";
 // import { UserContext } from "../Context/UserContext";
@@ -7,14 +7,15 @@ import CartImages from "./CartImages";
 export default function Cart () {
     // const { user } = useContext(UserContext)
     const [cart, setCart] = useState([])
-    const cartTotal = 5
-
+    
     useEffect(() =>  {
         fetch('/customs')
-            .then(response => response.json())
-                .then(data => setCart(data));
+        .then(response => response.json())
+        .then(data => setCart(data));
     }, []);
 
+    const cartTotal = cart.reduce((total, c) => total + c.clothing.price, 0)
+    
     const cartItems = Array.isArray(cart) && cart.length > 0 ? (
         cart.map(c => (
             <Segment key={c.id} color="orange" size="massive">
