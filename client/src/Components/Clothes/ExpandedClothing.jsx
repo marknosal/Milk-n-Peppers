@@ -8,6 +8,9 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
     const [imgPaths, setImgPaths] = useState([])
     const { user, addToCart, error, setError } = useContext(UserContext)
 
+    let buttonContent = user ? 'Add To Cart' : 'Please Login To Purchase'
+    if (error) buttonContent = 'Already in cart'
+    
     useEffect(() => {
         fetch(`/clothing_image_path/${clothing.id}`)
             .then(response => {
@@ -61,13 +64,14 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                             </Container>
                             <MeasurementList clothing={clothing} />
                             <Button 
+                                content='test'
                                 className="add-cart-button" 
                                 size="huge" 
                                 onClick={() => addToCart(clothing.id)} 
                                 disabled={!user} 
                                 primary
                             >
-                                {!user ? 'Please Login To Purchase' : !error ? 'Add To Cart' : error.error}
+                                {buttonContent}
                             </Button>
                         </Container>
                     </Grid.Column>
