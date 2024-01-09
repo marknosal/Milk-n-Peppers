@@ -1,37 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Divider, Segment, SegmentGroup, Image } from "semantic-ui-react";
+import { Button, Container, Divider, Segment, SegmentGroup, Header } from "semantic-ui-react";
+import "../../index.css"
+import CartImages from "./CartImages";
 // import { UserContext } from "../Context/UserContext";
 
 export default function Cart () {
     // const { user } = useContext(UserContext)
     const [cart, setCart] = useState([])
+    const cartTotal = 5
 
     useEffect(() =>  {
         fetch('/customs')
             .then(response => response.json())
-                .then(data => setCart(data))
-    }, [])
+                .then(data => setCart(data));
+    }, []);
 
     const cartItems = Array.isArray(cart) && cart.length > 0 ? (
         cart.map(c => (
-            <Segment key={c.id} color="orange" size="massive" style={{color: 'orange'}}>
-                {c.clothing.name}
-                <Image 
-                    src={'/' + c.clothing.clothing_image_paths[0].image_path} 
-                    size="small" 
-                />
-                <Button 
-                    content="Customize"
-                    // floated="right"
-                    color="orange"
-                />
-                <Button 
-                    content="Delete"
-                    onClick={() => handleDeleteClick(c.id)}
-                    // floated="right"
-                    color="orange"
-                />
-
+            <Segment key={c.id} color="orange" size="massive">
+                <p>{c.clothing.name}</p>
+                <CartImages imagePaths={c.clothing.clothing_image_paths} />
+                <div style={{ marginTop: '1em' }}>
+                    <Button content="Customize" color="orange" />
+                    <Button content="Delete" color="orange" onClick={() => handleDeleteClick(c.id)} />
+                </div>
+                <div style={{ marginBottom: 'auto', padding: '0.5em', textAlign: 'right' }}>
+                    Price: ${c.clothing.price} {/* Assuming the price is accessible from the cart item */}
+                </div>
             </Segment>
         ))
     ) : (
@@ -66,11 +61,12 @@ export default function Cart () {
     }
 
     return (
-        <Container className="cart-container">
+        <div className="cart-container">
             <Divider horizontal>Cart</Divider>
             <SegmentGroup>
                 {cartItems}
             </SegmentGroup>
-        </Container>
+            <Header className="cartTotalH1" as='h1' textAlign="right">Total: ${cartTotal}</Header>
+        </div>
     )
 }
