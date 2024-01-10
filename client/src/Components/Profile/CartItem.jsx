@@ -16,6 +16,7 @@ export default function CartItem ({ cartItem: { id, clothing: { name, clothing_i
     };
   
     const handleSaveClick = (customizedCustom) => {
+        console.log('in save')
         const updatedCart = cart.map(c => (
             c.id === customizedCustom.id ? customizedCustom : c
         ))

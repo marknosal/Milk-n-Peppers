@@ -17,7 +17,7 @@ export default function Cart () {
     
     const cartItems = Array.isArray(cart) && cart.length > 0 ? (
         cart.map(c => (
-            <CartItem cartItem={c} onDeleteClick={handleDeleteClick} setCart={setCart} cart={cart} />
+            <CartItem key={c.id} cartItem={c} onDeleteClick={handleDeleteClick} setCart={setCart} cart={cart} />
         ))
     ) : (
         <Segment>Cart Empty!</Segment>

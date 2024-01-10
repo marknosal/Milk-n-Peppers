@@ -16,6 +16,7 @@ export default function CustomizationPortal({ open, onSave, onCancel, custom }) 
         },
         validationSchema: mySchema,
         onSubmit: (values) => {
+            console.log('in submit')
             fetch(`/customs/${custom.id}`, {
                 method: 'PATCH',
                 headers: {
@@ -27,6 +28,7 @@ export default function CustomizationPortal({ open, onSave, onCancel, custom }) 
                     if (response.ok) {
                         response.json().then(data => {
                             onSave(data)
+                            formik.resetForm()
                         })
                     } else {
                         response.json().then(data => {
@@ -58,22 +60,10 @@ export default function CustomizationPortal({ open, onSave, onCancel, custom }) 
                         />
                         <p>{formik.errors.notes}</p>
                     </div>
-                    <Button content="Save" color="green" onClick={onSave} />
+                    <Button content="Save" color="green" type='submit' />
                     <Button content="Cancel" color="red" onClick={onCancel} />
                 </Form>
             </Segment>
         </Portal>
-        // <Portal open={open}>
-        //     <Segment style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        //         <Form>
-        //             <Form.Field>
-        //                 <label>Customization:</label>
-        //                 <Input placeholder="Personal Measurements & Special Requests" />
-        //             </Form.Field>
-        //             <Button content="Save" color="green" onClick={onSave} />
-        //             <Button content="Cancel" color="red" onClick={onCancel} />
-        //         </Form>
-        //     </Segment>
-        // </Portal>
     );
 }
