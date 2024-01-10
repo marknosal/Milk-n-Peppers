@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import "../../index.css"
-import { Segment, Button } from "semantic-ui-react"
+import { Segment, Button, Header } from "semantic-ui-react"
 import CartImages from "./CartImages"
 import CustomizationPortal from "./CustomizePortal"
 
@@ -16,7 +16,6 @@ export default function CartItem ({ cartItem: { id, clothing: { name, clothing_i
     };
   
     const handleSaveClick = (customizedCustom) => {
-        console.log('in save')
         const updatedCart = cart.map(c => (
             c.id === customizedCustom.id ? customizedCustom : c
         ))
@@ -25,7 +24,7 @@ export default function CartItem ({ cartItem: { id, clothing: { name, clothing_i
     };
     return (
         <Segment key={id} color="orange" size="massive">
-            <p>{name}</p>
+            <Header as='h2' className="cart-item-header">{name}</Header>
             <CartImages imagePaths={clothing_image_paths} />
             <div style={{ marginTop: '1em' }}>
                 <Button content="Customize" color="orange" onClick={() => handleCustomizeClick()} />

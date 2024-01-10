@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Container, Header } from "semantic-ui-react";
+import { useLocation } from "react-router-dom";
 import ClothingCard from "./ClothingCard";
 import ExpandedClothing from "./ExpandedClothing";
 import "../../index.css"
@@ -8,13 +9,22 @@ export default function Clothes () {
     const [clothings, setClothings] = useState([])
     const [expandClothingId, setExpandClothingId] = useState(null)
 
+    const location = useLocation()
+
     useEffect(() => {
         fetch('/clothes')
             .then(r=>r.json())
-                .then(d=>setClothings(d))
-    }, [])
+                .then(d=>setClothings(d));
 
-    const expandedClothing = clothings.find(c => c.id === expandClothingId)
+        const expandParam = new URLSearchParams(location.search).get('expand');
+        console.log(expandParam)
+        if (expandParam) {
+            console.log(expandParam)
+            // setExpandClothingId(expandParam)
+        }
+    }, [location.search])
+
+    const expandedClothing = expandClothingId ? clothings.find(c => c.id === expandClothingId) : null
 
     const cards = clothings.map(c => (
         <ClothingCard 

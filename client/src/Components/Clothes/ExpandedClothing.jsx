@@ -5,6 +5,7 @@ import { UserContext } from "../Context/UserContext"
 import "../../index.css";
 
 export default function ExpandedClothing ({ clothing, minimizeClothing }) {
+
     const [imgPaths, setImgPaths] = useState([])
     const [buttonContent, setButtonContent] = useState('Add To Cart')
     const { user } = useContext(UserContext)

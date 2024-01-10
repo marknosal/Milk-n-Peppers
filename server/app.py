@@ -89,8 +89,17 @@ class Clothings(Resource):
 class Profile(Resource):
     def get(self):
         return {}, 123
+    
+class ClothingImagePaths(Resource):
+    def get(self):
+        try:
+            image_paths = ClothingImagePath.query.all()
+            img_path_dict = [p.to_dict() for p in image_paths]
+            return img_path_dict, 200
+        except:
+            return { 'error': 'image_paths not found'}, 404
             
-class ClothingImagesById(Resource):
+class ClothingImagePathsById(Resource):
     def get(self, id):
         try:
             image_paths = ClothingImagePath.query.filter_by(clothing_id=id).all()
@@ -175,7 +184,8 @@ api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(Blogs, '/blogs', endpoint='blogs')
 api.add_resource(Clothings, '/clothes', endpoint='clothes')
 api.add_resource(Profile, '/profile', endpoint='profile')
-api.add_resource(ClothingImagesById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path')
+api.add_resource(ClothingImagePaths, '/clothing_image_path', endpoint='clothing_image_path')
+api.add_resource(ClothingImagePathsById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path_by_id')
 api.add_resource(Customs, '/customs', endpoint='customs')
 api.add_resource(CustomsById, '/customs/<int:id>', endpoint='customs_by_id')
 
