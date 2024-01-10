@@ -4,7 +4,7 @@ import { Segment, Button } from "semantic-ui-react"
 import CartImages from "./CartImages"
 import CustomizationPortal from "./CustomizePortal"
 
-export default function CartItem ({ cartItem: { id, clothing: { name, clothing_image_paths, price } }, onDeleteClick, cartItem }) {
+export default function CartItem ({ cartItem: { id, clothing: { name, clothing_image_paths, price } }, onDeleteClick, cartItem, setCart, cart }) {
     const [showCustomizePortal, setShowCustomizePortal] = useState(false);
 
     const handleCustomizeClick = () => {
@@ -15,8 +15,11 @@ export default function CartItem ({ cartItem: { id, clothing: { name, clothing_i
         setShowCustomizePortal(false);
     };
   
-    const handleSaveClick = () => {
-      // Handle save logic here
+    const handleSaveClick = (customizedCustom) => {
+        const updatedCart = cart.map(c => (
+            c.id === customizedCustom.id ? customizedCustom : c
+        ))
+        setCart(updatedCart)
         setShowCustomizePortal(false);
     };
     return (
