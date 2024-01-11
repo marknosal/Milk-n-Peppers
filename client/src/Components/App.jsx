@@ -4,6 +4,7 @@ import SideBanner from './Base/SideBanner';
 import Main from './Base/Main';
 import '../index.css'
 import { UserContext } from './Context/UserContext';
+import BaseHeader from './Base/BaseHeader';
 
 export default function App () {
     const { user } = useContext(UserContext)
@@ -22,6 +23,7 @@ export default function App () {
                 <SideBanner navLinks={link_list} />
                 <Main routeLinks={link_list} />
             </div>
+            <BaseHeader />
         </div>
     );
 };

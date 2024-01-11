@@ -157,6 +157,11 @@
     margin-top: 0px;
     /* padding-right: 10px; */
 }
+.ui.button.purchase-button {
+    position: absolute;
+    margin-right: 35px;
+    margin-top: 0px;
+}
 
 .ui.segment.customize-form-container {
     position: fixed;

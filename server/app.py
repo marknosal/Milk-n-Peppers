@@ -86,6 +86,16 @@ class Clothings(Resource):
         clothings_dict = [c.to_dict() for c in clothings]
         return clothings_dict, 200
     
+class ClothingsById(Resource):
+    def get(self, id):
+        try:
+            clothing = Clothing.query.filter_by(id=id).one_or_none()
+            if clothing:
+                return clothing.to_dict(), 200
+            return { 'error': 'clothing not found' }, 404
+        except Exception as e:
+            return { 'error': str(e) }, 400
+    
 class Profile(Resource):
     def get(self):
         return {}, 123
@@ -183,6 +193,7 @@ api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(Blogs, '/blogs', endpoint='blogs')
 api.add_resource(Clothings, '/clothes', endpoint='clothes')
+api.add_resource(ClothingsById, '/clothes/<int:id>', endpoint='clothes_by_id')
 api.add_resource(Profile, '/profile', endpoint='profile')
 api.add_resource(ClothingImagePaths, '/clothing_image_path', endpoint='clothing_image_path')
 api.add_resource(ClothingImagePathsById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path_by_id')

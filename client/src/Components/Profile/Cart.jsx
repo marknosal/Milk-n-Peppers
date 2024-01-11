@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Divider, Segment, SegmentGroup, Header } from "semantic-ui-react";
+import { Divider, Segment, SegmentGroup, Header, Button, Label } from "semantic-ui-react";
 import "../../index.css"
 import CartItem from "./CartItem";
 
@@ -50,13 +50,31 @@ export default function Cart () {
         setCart(updatedCart)
     }
 
+    function handlePurchaseClick() {
+        console.log()
+    }
+
     return (
         <div className="cart-container">
             <Divider horizontal>Cart</Divider>
+            <Button className="purchase-button" content='Purchase' />
             <SegmentGroup>
+
                 {cartItems}
             </SegmentGroup>
-            <Header className="cartTotalH1" as='h1' textAlign="right">Total: ${cartTotal}</Header>
+
+                <Header className="cartTotalH1" as='h1' textAlign="right">
+                    <Label 
+                        style={{ marginBottom: '5px' }} 
+                        pointing='right' 
+                        color="orange" 
+                        size="big"
+                        onClick={handlePurchaseClick}
+                    >
+                        Click to Purchase!
+                    </Label>
+                    Total: ${cartTotal}
+                </Header>        
         </div>
     )
 }

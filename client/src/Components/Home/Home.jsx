@@ -7,7 +7,7 @@ import ClothingCarousel from "./ClothingCarousel";
 export default function Home() {
 
     const [clothingImages, setClothingImages] = useState([]);
-    const [testimonials, setTestimonials] = useState([]);
+    // const [testimonials, setTestimonials] = useState([]);
     useEffect(() => {
         fetch('/clothing_image_path')
             .then(response => response.json())
