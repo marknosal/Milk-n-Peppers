@@ -14,7 +14,8 @@ export default function Clothes () {
     useEffect(() => {
         fetch('/clothes')
             .then(r=>r.json())
-                .then(d=>setClothings(d));
+                .then(d=>setClothings(d))
+
 
         const expandParam = new URLSearchParams(location.search).get('expand');
         console.log(expandParam)

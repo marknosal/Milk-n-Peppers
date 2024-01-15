@@ -8,7 +8,6 @@ import Profile from '../Profile/Profile'
 import About from '../About/About'
 import Blog from '../Blog/Blog'
 import Clothes from '../Clothes/Clothes'
-import BaseHeader from './BaseHeader'
 
 export default function Main({ routeLinks }) {
 
