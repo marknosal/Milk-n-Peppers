@@ -15,6 +15,7 @@ faker = "*"
 flask-bcrypt = "*"
 beautifulsoup4 = "*"
 stripe = "*"
+python-dotenv = "*"
 
 [requires]
 python_full_version = "3.9.2"

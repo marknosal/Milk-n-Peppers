@@ -28,7 +28,7 @@ export default function ClothingCarousel({ images }) {
     ))
 
     function handleClick(expandId) {
-        navigate.push(`/clothes?expand=${expandId}`)
+        navigate(`/clothes?expand=${expandId}`)
     }
     
 

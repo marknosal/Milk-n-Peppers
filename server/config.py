@@ -25,7 +25,7 @@ db = SQLAlchemy(metadata=metadata)
 migrate = Migrate(app, db)
 db.init_app(app)
 bcrypt = Bcrypt(app)
-app.secret_key = os.urandom(16)
+app.secret_key = os.getenv('SECRET_KEY')
 
 api = Api(app)
 

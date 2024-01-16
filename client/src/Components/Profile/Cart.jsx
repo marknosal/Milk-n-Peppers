@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { Divider, Segment, SegmentGroup, Header, Button, Label } from "semantic-ui-react";
 import "../../index.css"
 import CartItem from "./CartItem";
+// import CheckoutPortal from "./CheckoutPortal";
 
 export default function Cart () {
     // const { user } = useContext(UserContext)
     const [cart, setCart] = useState([])
+    // const [showCheckout, setShowCheckout] = useState(null)
 
     const navigate = useNavigate()
     
@@ -57,6 +59,13 @@ export default function Cart () {
         navigate('/checkout')
     }
 
+    // const handleCheckoutClick = () => {
+    //     setShowCheckout(true);
+    // }
+    // const handleCancelCheckoutClick = () => {
+    //     setShowCheckout(false)
+    // }
+
     return (
         <div className="cart-container">
             <Divider horizontal>Cart</Divider>
@@ -66,18 +75,23 @@ export default function Cart () {
                 {cartItems}
             </SegmentGroup>
 
-                <Header className="cartTotalH1" as='h1' textAlign="right">
-                    <Label 
-                        style={{ marginBottom: '5px' }} 
-                        pointing='right' 
-                        color="orange" 
-                        size="big"
-                        onClick={handlePurchaseClick}
-                    >
-                        Click to Purchase!
-                    </Label>
-                    Total: ${cartTotal}
-                </Header>        
+            <Header className="cartTotalH1" as='h1' textAlign="right">
+                <Label 
+                    style={{ marginBottom: '5px' }} 
+                    pointing='right' 
+                    color="orange" 
+                    size="big"
+                    onClick={handlePurchaseClick}
+                >
+                    Click to Purchase!
+                </Label>
+                Total: ${cartTotal}
+            </Header>
+
+            {/* <CheckoutPortal 
+                open={showCheckout}
+                cart={cartItems}
+            /> */}
         </div>
     )
 }

@@ -76,3 +76,5 @@ node_modules/
 /server/__pycache__/**
 server/migrations/versions/db387cee2e8f_add_description_to_clothings_table.py
 server/__pycache__/**
+
+.env
