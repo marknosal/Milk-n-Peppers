@@ -209,7 +209,7 @@ class CheckoutSession(Resource):
                 return_url=YOUR_DOMAIN + '/return?session_id={CHECKOUT_SESSION_ID}',
                 automatic_tax={'enabled': True},
             )
-            print(session.return_url)
+
         except Exception as e:
             return { 'error': str(e) }, 400
         

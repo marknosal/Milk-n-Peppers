@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Error from "../Error";
@@ -7,6 +8,8 @@ import { UserContext } from "../Context/UserContext";
 export default function SignupForm () {
     const [error, setError] = useState(null)
     const { login } = useContext(UserContext)
+
+    const navigate = useNavigate()
 
     const signupSchema = yup.object().shape({
         username: yup.string()
@@ -48,6 +51,7 @@ export default function SignupForm () {
                         login(data)
                         setError(null)
                         resetForm()
+                        navigate('/')
                     })
                 } else {
                     response.json().then(data => {

@@ -3,10 +3,13 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Error from "../Error";
 import { UserContext } from "../Context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm () {
     const [error, setError] = useState(null)
     const { login } = useContext(UserContext)
+
+    const navigate = useNavigate()
 
     const valSchema = yup.object().shape({
         username: yup.string().required('Must exist'),
@@ -33,6 +36,7 @@ export default function LoginForm () {
                         login(data)
                         setError(null)
                         resetForm()
+                        navigate('/')
                     })
                 } else {
                     response.json().then(data => {
