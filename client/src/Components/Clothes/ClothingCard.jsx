@@ -1,4 +1,4 @@
-import { Card } from "semantic-ui-react";
+import { Button, Card, Grid, GridColumn, Header, Label } from "semantic-ui-react";
 import "../../index.css";
 
 export default function ClothingCard ({ clothing, expand }) {
@@ -9,7 +9,17 @@ export default function ClothingCard ({ clothing, expand }) {
 
     return (
         <Card className='card-clothing' onClick={handleExpandClick}>
-            <h3>{clothing.name}</h3>
+            <Grid columns={2}>
+                <GridColumn width={8}>
+                    <Header as="h3">{clothing.name}</Header>
+                </GridColumn>
+                <GridColumn width={8}>
+                    <Header as="h4" floated="right">${clothing.price.toFixed(2)}</Header>
+                </GridColumn>
+            </Grid>
+
+            
+            
             <img 
                 src={'/' + clothing.clothing_image_paths[0].image_path} 
                 alt={clothing.name} 

@@ -72,7 +72,7 @@ export default function ExpandedClothing ({ clothing, minimizeClothing }) {
                     </Grid.Column>
                     <Grid.Column width={6}>
                         <Container className="options-container">
-                            <Header as='h1' textAlign="center">{clothing.name}</Header>
+                            <Header as='h1' textAlign="center">{clothing.name} (${clothing.price.toFixed(2)})</Header>
                             <Container textAlign="justified">
                                 <p className="expanded-clothing-description">{clothing.description}</p>
                             </Container>

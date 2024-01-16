@@ -85,7 +85,7 @@ export default function Cart () {
                 >
                     Click to Purchase!
                 </Label>
-                Total: ${cartTotal}
+                Total: ${cartTotal.toFixed(2)}
             </Header>
 
             {/* <CheckoutPortal 

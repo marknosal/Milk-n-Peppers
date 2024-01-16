@@ -31,7 +31,7 @@ export default function CartItem ({ cartItem: { id, clothing: { name, clothing_i
                 <Button content="Delete" color="orange" onClick={() => onDeleteClick(id)} />
             </div>
             <div style={{ marginBottom: 'auto', padding: '0.5em', textAlign: 'right' }}>
-                Price: ${price}
+                Price: ${price.toFixed(2)}
             </div>
 
             <CustomizationPortal 

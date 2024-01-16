@@ -195,16 +195,32 @@ class CustomsById(Resource):
             return { 'error': 'An error occurred while processing the request' }, 500
         
 class CheckoutSession(Resource):
+    def get_user_cart(self):
+        try:
+            user_id = session.get('user_id')
+            customs = Custom.query.filter(Custom.user_id==user_id).all()
+            if customs:
+                body = [c.to_dict(only=('clothing.stripe_price_id',)) for c in customs]
+                status = 200
+                return body, status
+            return { 'error': 'Nothing in cart'}, 404
+        except Exception as e:
+            return { 'error': str(e) }, 400
+
     def post(self):
         try:
+            cart_price_codes, status = self.get_user_cart()
+            # print(cart_price_codes)
+            line_items = []
+            for price_code_obj in cart_price_codes:
+                print(price_code_obj)
+                line_items.append({
+                    'price': price_code_obj['clothing']['stripe_price_id'],
+                    'quantity': 1,
+                })
             session = stripe.checkout.Session.create(
                 ui_mode='embedded',
-                line_items=[
-                    {
-                        'price': 'price_1OYxFxAY4XFYCSiOGyvb7spe',
-                        'quantity': 1,
-                    },
-                ],
+                line_items=line_items,
                 mode='payment',
                 return_url=YOUR_DOMAIN + '/return?session_id={CHECKOUT_SESSION_ID}',
                 automatic_tax={'enabled': True},

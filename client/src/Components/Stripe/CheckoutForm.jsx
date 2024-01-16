@@ -14,7 +14,6 @@ export default function CheckoutForm () {
         fetch('/create-checkout-session', {
             method: 'POST',
         }).then(response => response.json())
-            // .then(data => console.log(data.error))
             .then(data => setClientSecret(data.clientSecret))
     }, [])
 
