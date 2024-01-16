@@ -1,21 +1,21 @@
 import { createContext, useState, useEffect, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext({});
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const login = useCallback((user) => {
         setUser(user);
-        history.push("/profile");
-    }, [history]);    
+        // navigate("/profile");
+    }, []);    
 
     const logout = useCallback(() => {
         setUser(null);
-        history.push("/");
-    }, [history]);
+        navigate("/");
+    }, [navigate]);
 
     useEffect(() => {
         fetch("/check_session").then((response) => {

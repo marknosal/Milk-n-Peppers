@@ -1,25 +1,32 @@
 #!/usr/bin/env python3
 
-from flask import request, session, abort
+from flask import request, session, abort, jsonify, redirect
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 import datetime
+import stripe
 
 from config import app, db, api
 from models import User, Clothing, Blog, Custom, ClothingImagePath
+
+YOUR_DOMAIN = 'http://localhost:4000'
+
+stripe.api_key = 'sk_test_51OYuqDAY4XFYCSiOOP7aCo5pUOLoEsF9lSq3RVwxao4hb7LOWLGwPIQJqNBE2e51rfuJKKXXnrR6DNfaat1j9EI100EnRvmI0a'
 
 @app.route('/')
 def index():
     return '<h1>Milk n Peppers</h1>'
 
 OPEN_ACCESS_LIST = [
+    '/',
     'signup',
     'home',
     'login',
     'about',
     'clothes',
     'check_session',
-    'clothing_image_path'
+    'clothing_image_path',
+    'clothing_image_path_by_id'
 ]
 
 @app.before_request
@@ -186,6 +193,33 @@ class CustomsById(Resource):
             return { 'error': str(e) }, 400
         except Exception:
             return { 'error': 'An error occurred while processing the request' }, 500
+        
+class CheckoutSession(Resource):
+    def post(self):
+        try:
+            session = stripe.checkout.Session.create(
+                ui_mode='embedded',
+                line_items=[
+                    {
+                        'price': 'price_1OYxFxAY4XFYCSiOGyvb7spe',
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                return_url=YOUR_DOMAIN + '/return?session_id={CHECKOUT_SESSION_ID}',
+                automatic_tax={'enabled': True},
+            )
+            print(session.return_url)
+        except Exception as e:
+            return { 'error': str(e) }, 400
+        
+        return jsonify(clientSecret=session.client_secret)
+    
+class SessionStatus(Resource):
+    def get(self):
+        session = stripe.checkout.Session.retrieve(request.args.get('session_id'))
+
+        return jsonify(status=session.status, customer_email=session.customer_details.email)
 
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -199,6 +233,8 @@ api.add_resource(ClothingImagePaths, '/clothing_image_path', endpoint='clothing_
 api.add_resource(ClothingImagePathsById, '/clothing_image_path/<int:id>', endpoint='clothing_image_path_by_id')
 api.add_resource(Customs, '/customs', endpoint='customs')
 api.add_resource(CustomsById, '/customs/<int:id>', endpoint='customs_by_id')
+api.add_resource(CheckoutSession, '/create-checkout-session', endpoint='create-checkout-session')
+api.add_resource(SessionStatus, '/session-status', endpoint='session-status')
 
 
 if __name__ == '__main__':

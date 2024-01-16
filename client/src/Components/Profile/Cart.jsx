@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Divider, Segment, SegmentGroup, Header, Button, Label } from "semantic-ui-react";
 import "../../index.css"
 import CartItem from "./CartItem";
@@ -6,6 +7,8 @@ import CartItem from "./CartItem";
 export default function Cart () {
     // const { user } = useContext(UserContext)
     const [cart, setCart] = useState([])
+
+    const navigate = useNavigate()
     
     useEffect(() =>  {
         fetch('/customs')
@@ -51,7 +54,7 @@ export default function Cart () {
     }
 
     function handlePurchaseClick() {
-        console.log()
+        navigate('/checkout')
     }
 
     return (

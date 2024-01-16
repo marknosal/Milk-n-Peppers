@@ -2,10 +2,10 @@ import React from "react";
 import { Image } from "semantic-ui-react";
 import Slider from "react-slick";
 import "../../index.css"
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ClothingCarousel({ images }) {
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const settings = {
         infinite: true,
@@ -28,7 +28,7 @@ export default function ClothingCarousel({ images }) {
     ))
 
     function handleClick(expandId) {
-        history.push(`/clothes?expand=${expandId}`)
+        navigate.push(`/clothes?expand=${expandId}`)
     }
     
 
