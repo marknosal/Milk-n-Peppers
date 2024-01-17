@@ -1,4 +1,4 @@
-import { Button, Card, Grid, GridColumn, Header, Label } from "semantic-ui-react";
+import { Card, Grid, GridColumn, Header } from "semantic-ui-react";
 import "../../index.css";
 
 export default function ClothingCard ({ clothing, expand }) {

@@ -77,7 +77,7 @@ export default function Cart () {
 
             <Header className="cartTotalH1" as='h1' textAlign="right">
                 <Label 
-                    style={{ marginBottom: '5px' }} 
+                    style={{ marginBottom: '5px', cursor: 'pointer' }} 
                     pointing='right' 
                     color="orange" 
                     size="big"
