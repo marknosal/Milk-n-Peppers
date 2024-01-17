@@ -33,7 +33,6 @@ export default function Cart () {
     ) : (
         <Segment>Cart Empty!</Segment>
     );
-      
 
 
     function handleDeleteClick(cartId) {
@@ -48,7 +47,7 @@ export default function Cart () {
                 handleDelete(cartId)
             } else {
                 response.json().then(data => {
-                    console.log(data)
+                    console.log('not deleted')
                 })
             }
         })
@@ -71,7 +70,7 @@ export default function Cart () {
     // const handleCancelCheckoutClick = () => {
     //     setShowCheckout(false)
     // }
-
+    console.log(cart.length)
     return (
         <div className="cart-container">
             <Divider horizontal>Cart</Divider>
@@ -83,11 +82,11 @@ export default function Cart () {
 
             <Header className="cartTotalH1" as='h1' textAlign="right">
                 <Label 
-                    style={{ marginBottom: '5px', cursor: 'pointer' }} 
+                    style={{ marginBottom: '5px', cursor: cart.length > 0 ? 'pointer' : 'not-allowed' }} 
                     pointing='right' 
                     color="orange" 
                     size="big"
-                    onClick={handlePurchaseClick}
+                    onClick={cart.length > 0 ? handlePurchaseClick : null}
                 >
                     Click to Purchase!
                 </Label>

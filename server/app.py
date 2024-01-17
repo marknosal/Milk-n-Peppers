@@ -135,7 +135,7 @@ class Customs(Resource):
         try:
             user_id = session.get('user_id')
             user = User.query.filter_by(id=user_id).one_or_none()
-            customs = Custom.query.filter(Custom.user_id==user_id and Custom.purchased == False).all()
+            customs = Custom.query.filter(Custom.user_id==user_id, Custom.purchased == False).all()
             if customs:
                 return [c.to_dict() for c in customs], 200
             return { 'error': f'{user.username} does not have any customs' }, 404
@@ -222,7 +222,7 @@ class CheckoutSession(Resource):
     def get_user_cart(self):
         try:
             user_id = session.get('user_id')
-            customs = Custom.query.filter(Custom.user_id==user_id).all()
+            customs = Custom.query.filter(Custom.user_id==user_id, Custom.purchased==False).all()
             if customs:
                 body = [c.to_dict(only=('clothing.stripe_price_id',)) for c in customs]
                 status = 200
