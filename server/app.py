@@ -61,6 +61,11 @@ class Login(Resource):
                 return {'error': 'username/password do not match'}, 401
         except Exception as e:
             return {'error': str(e)}, 401
+        
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        return {}, 204
 
 class Signup(Resource):
     def post(self):
@@ -130,7 +135,7 @@ class Customs(Resource):
         try:
             user_id = session.get('user_id')
             user = User.query.filter_by(id=user_id).one_or_none()
-            customs = Custom.query.filter(Custom.user_id==user_id).all()
+            customs = Custom.query.filter(Custom.user_id==user_id and Custom.purchased == False).all()
             if customs:
                 return [c.to_dict() for c in customs], 200
             return { 'error': f'{user.username} does not have any customs' }, 404
@@ -151,6 +156,7 @@ class Customs(Resource):
 
             existing_custom = Custom.query \
                 .filter_by(user_id=user_id, clothing_id=clothing_id).first()
+
             if existing_custom:
                 return { 'error': 'Already In Cart' }, 400
 
@@ -271,6 +277,7 @@ class SessionStatus(Resource):
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(Blogs, '/blogs', endpoint='blogs')
 api.add_resource(Clothings, '/clothes', endpoint='clothes')

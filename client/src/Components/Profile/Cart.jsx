@@ -15,7 +15,13 @@ export default function Cart () {
     useEffect(() =>  {
         fetch('/customs')
         .then(response => response.json())
-        .then(data => setCart(data));
+        .then(data => {
+            if (!data.error) {
+                setCart(data)
+            } else {
+                console.log(data.error)
+            }
+        })
     }, []);
 
     const cartTotal = cart.reduce((total, c) => total + c.clothing.price, 0)

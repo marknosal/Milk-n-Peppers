@@ -13,6 +13,9 @@ function UserProvider({ children }) {
     }, []);    
 
     const logout = useCallback(() => {
+        fetch('/logout', {
+            method: 'DELETE',
+        })
         setUser(null);
         navigate("/");
     }, [navigate]);
