@@ -15,7 +15,7 @@ export default function SideBanner ({ navLinks }) {
                     className = 'side-banner-link'
                     to = {linkString === 'home' ? '/' : `/${linkString}`}
                     style={({ isActive }) => isActive ? {background: 'white', color: 'darkorange' } : {}}
-                    activeStyle = {{ background: 'green', }}
+                    activestyle = {{ background: 'green', }}
                 >
                     {capitalizeFirstLetter(linkString)}
                     {linkString === 'profile' ? '/Cart' : null}

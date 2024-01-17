@@ -28,6 +28,18 @@ export default function Return () {
     }
 
     if (status === 'complete') {
+        if (priceIds) {
+            priceIds.forEach((priceId) => {
+                fetch('/customs', {
+                    method: 'PATCH',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({'price_id': priceId})
+                })
+            })
+        }
 
         return (
             <Container text style={{ marginTop: '2em', textAlign: 'center' }}>

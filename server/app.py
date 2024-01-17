@@ -164,6 +164,24 @@ class Customs(Resource):
         except Exception:
             return { 'error': 'An error occurred while processing the request' }, 500
         
+    def patch(self):
+        data = request.get_json()
+        try:
+            user_id = session.get('user_id')
+            price_id = data.get('price_id')
+            custom = (
+                Custom.query
+                .filter_by(user_id=user_id)
+                .join(Custom.clothing)
+                .filter(Clothing.stripe_price_id == price_id)
+                .first()
+            )
+            custom.purchased = True
+            db.session.commit()
+            return custom.to_dict(), 200
+        except Exception as e:
+            return { 'error': str(e) }, 500
+        
 class CustomsById(Resource):
     def delete(self, id):
         deleted_custom = Custom.query.filter_by(id=id).one_or_none()
