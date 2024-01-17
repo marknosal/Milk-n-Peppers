@@ -231,21 +231,24 @@ class CheckoutSession(Resource):
     
 class SessionStatus(Resource):
     def get(self):
-        session = stripe.checkout.Session.retrieve(request.args.get('session_id'))
+        session_id = request.args.get('session_id')
+        session = stripe.checkout.Session.retrieve(session_id)
+        line_items = stripe.checkout.Session.list_line_items(session_id)
+        price_ids = [item.price.id for item in line_items.data]
 
-        return jsonify(status=session.status, customer_email=session.customer_details.email)
+        return jsonify(status=session.status, customer_email=session.customer_details.email, priceIds=price_ids)
 
-class GetLineItems(Resource):
-    def get(self):
-        try:
-            session_id = request.args.get('session_id')
-            line_items = stripe.checkout.Session.list_line_items(session_id)
-            price_ids = [item.price.id for item in line_items.data]
+# class GetLineItems(Resource):
+#     def get(self):
+#         try:
+#             session_id = request.args.get('session_id')
+#             line_items = stripe.checkout.Session.list_line_items(session_id)
+#             price_ids = [item.price.id for item in line_items.data]
 
-            return price_ids, 200
-        except Exception as e:
-            print(str(e))
-            return {str(e)}, 500
+#             return price_ids, 200
+#         except Exception as e:
+#             print(str(e))
+#             return {str(e)}, 500
 
 
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -261,7 +264,7 @@ api.add_resource(Customs, '/customs', endpoint='customs')
 api.add_resource(CustomsById, '/customs/<int:id>', endpoint='customs_by_id')
 api.add_resource(CheckoutSession, '/create-checkout-session', endpoint='create-checkout-session')
 api.add_resource(SessionStatus, '/session-status', endpoint='session-status')
-api.add_resource(GetLineItems, '/get-line-items', endpoint='get-line-items')
+# api.add_resource(GetLineItems, '/get-line-items', endpoint='get-line-items')
 
 
 if __name__ == '__main__':
