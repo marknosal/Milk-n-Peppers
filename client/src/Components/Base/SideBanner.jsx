@@ -2,9 +2,11 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 
 export default function SideBanner ({ navLinks }) {
+    
     function capitalizeFirstLetter(str) {
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
+
     function genNavLinks(navLinks) {
 
         const allNavLinks = navLinks.map((linkString, index) => (
@@ -12,8 +14,8 @@ export default function SideBanner ({ navLinks }) {
                     key = {index}
                     className = 'side-banner-link'
                     to = {linkString === 'home' ? '/' : `/${linkString}`}
-                    exact
-                    activeStyle = {{ background: 'pink', }}
+                    style={({ isActive }) => isActive ? {background: 'white', color: 'darkorange' } : {}}
+                    activeStyle = {{ background: 'green', }}
                 >
                     {capitalizeFirstLetter(linkString)}
                     {linkString === 'profile' ? '/Cart' : null}

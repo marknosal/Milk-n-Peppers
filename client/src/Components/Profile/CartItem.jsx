@@ -30,7 +30,7 @@ export default function CartItem ({ cartItem: { id, clothing: { name, clothing_i
                 <Button content="Customize" color="orange" onClick={() => handleCustomizeClick()} />
                 <Button content="Delete" color="orange" onClick={() => onDeleteClick(id)} />
             </div>
-            <div style={{ marginBottom: 'auto', padding: '0.5em', textAlign: 'right' }}>
+            <div style={{ textAlign: 'right' }}>
                 Price: ${price.toFixed(2)}
             </div>
 
