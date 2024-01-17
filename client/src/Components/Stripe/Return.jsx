@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Container, Message, Header, Icon } from 'semantic-ui-react';
-import { /*BrowserRouter as Router, Route, Routes,*/ Navigate } from 'react-router-dom';
+import { /*BrowserRouter as Router, Route, Routes,*/ Navigate, useLocation } from 'react-router-dom';
 
 export default function Return () {
     const [status, setStatus] = useState(null)
     const [customerEmail, setCustomerEmail] = useState('')
+    const [priceIds, setPriceIds] = useState([])
+    const location = useLocation()
 
     useEffect(() => {
         const queryString = window.location.search;
@@ -18,6 +20,19 @@ export default function Return () {
                     setCustomerEmail(data.customer_email)
                 });
     }, []);
+
+    useEffect(() => {
+        const sessionId = new URLSearchParams(location.search).get('session_id');
+
+        if (sessionId) {
+            fetch(`/get-line-items?session_id=${sessionId}`)
+                .then(response => response.json())
+                    .then(data => {
+                        setPriceIds(data)
+                    })
+                        .catch(error => console.log(error))
+        }
+    }, [location.search])
 
     if (status === 'open') {
         return (
