@@ -224,7 +224,9 @@ class CheckoutSession(Resource):
             user_id = session.get('user_id')
             customs = Custom.query.filter(Custom.user_id==user_id, Custom.purchased==False).all()
             if customs:
-                body = [c.to_dict(only=('clothing.stripe_price_id',)) for c in customs]
+                # print([c.to_dict(only=('clothing.stripe_price_id', 'clothing.name', 'quantity')) for c in customs])
+                body = [c.to_dict(only=('clothing.stripe_price_id', 'clothing.name', 'quantity')) for c in customs]
+                # print(body)
                 status = 200
                 return body, status
             return { 'error': 'Nothing in cart'}, 404
@@ -234,12 +236,23 @@ class CheckoutSession(Resource):
     def post(self):
         try:
             cart_price_codes, status = self.get_user_cart()
+            # print(cart_price_codes)
             line_items = []
             for price_code_obj in cart_price_codes:
-                line_items.append({
-                    'price': price_code_obj['clothing']['stripe_price_id'],
-                    'quantity': 1,
-                })
+                # print(price_code_obj)
+                quantity = price_code_obj['quantity']
+                # print(quantity)
+                price_id = price_code_obj['clothing']['stripe_price_id']
+                server_clothing = Clothing.query.filter(Clothing.stripe_price_id==price_id, Clothing.stock>=quantity).one_or_none()
+                # print(server_clothing)
+                if server_clothing:
+                    line_items.append({
+                        'price': price_id,
+                        # change this after addicking stock
+                        'quantity': quantity,
+                    })
+                elif not server_clothing:
+                    return { 'error': 'Requested quantity out of stock' }, 400
             session = stripe.checkout.Session.create(
                 ui_mode='embedded',
                 line_items=line_items,

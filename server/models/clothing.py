@@ -23,6 +23,7 @@ class Clothing(db.Model, SerializerMixin):
     hips = db.Column(db.Float)
     description = db.Column(db.String)
     stripe_price_id = db.Column(db.String)
+    stock = db.Column(db.Integer, default=1)
 
     # relationships
     customs = db.relationship('Custom', back_populates='clothing')

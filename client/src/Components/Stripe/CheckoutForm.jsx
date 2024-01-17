@@ -13,8 +13,17 @@ export default function CheckoutForm () {
     useEffect(() => {
         fetch('/create-checkout-session', {
             method: 'POST',
-        }).then(response => response.json())
-            .then(data => setClientSecret(data.clientSecret))
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(data => setClientSecret(data.clientSecret))
+            } else {
+                response.json().then(error => (
+                    <h1>{error.error}</h1>
+                ))
+            }
+        })
+
+            
     }, [])
 
     return (

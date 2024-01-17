@@ -15,17 +15,17 @@ export default function Clothes () {
         fetch('/clothes')
             .then(r=>r.json())
                 .then(d=>setClothings(d))
-
-
-        const expandParam = new URLSearchParams(location.search).get('expand');
-        console.log(expandParam)
-        if (expandParam) {
-            console.log(expandParam)
-            // setExpandClothingId(expandParam)
-        }
+                    .then(() => {
+                        const expandParam = new URLSearchParams(location.search).get('expand');
+                        if (expandParam) {
+                            const intParam = Number(expandParam)
+                            setExpandClothingId(intParam)
+                        }
+                    })
     }, [location.search])
 
     const expandedClothing = expandClothingId ? clothings.find(c => c.id === expandClothingId) : null
+
 
     const cards = clothings.map(c => (
         <ClothingCard 
