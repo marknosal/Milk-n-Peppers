@@ -179,10 +179,12 @@ class Customs(Resource):
                 Custom.query
                 .filter_by(user_id=user_id)
                 .join(Custom.clothing)
-                .filter(Clothing.stripe_price_id == price_id)
+                .filter(Clothing.stripe_price_id==price_id)
                 .first()
             )
             custom.purchased = True
+            clothing = Clothing.query.filter(Clothing.stripe_price_id==price_id).one_or_none()
+            clothing.stock -= custom.quantity
             db.session.commit()
             return custom.to_dict(), 200
         except Exception as e:
@@ -236,19 +238,14 @@ class CheckoutSession(Resource):
     def post(self):
         try:
             cart_price_codes, status = self.get_user_cart()
-            # print(cart_price_codes)
             line_items = []
             for price_code_obj in cart_price_codes:
-                # print(price_code_obj)
                 quantity = price_code_obj['quantity']
-                # print(quantity)
                 price_id = price_code_obj['clothing']['stripe_price_id']
                 server_clothing = Clothing.query.filter(Clothing.stripe_price_id==price_id, Clothing.stock>=quantity).one_or_none()
-                # print(server_clothing)
                 if server_clothing:
                     line_items.append({
                         'price': price_id,
-                        # change this after addicking stock
                         'quantity': quantity,
                     })
                 elif not server_clothing:
