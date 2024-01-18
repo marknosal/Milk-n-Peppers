@@ -70,7 +70,6 @@ export default function Cart () {
     // const handleCancelCheckoutClick = () => {
     //     setShowCheckout(false)
     // }
-    console.log(cart.length)
     return (
         <div className="cart-container">
             <Divider horizontal>Cart</Divider>

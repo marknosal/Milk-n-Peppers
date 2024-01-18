@@ -93,6 +93,12 @@ class Blogs(Resource):
         return blogs_dict, 200
     
 class Clothings(Resource):
+    @classmethod
+    def in_stock(self, clothing):
+        # will need to add logic here if you ever allow user to purchase more than 1
+        users_cart = User.query.filter_by(id=session.get('user_id')).one_or_none()
+        return clothing.stock
+        
     def get(self):
         clothings = Clothing.query.all()
         clothings_dict = [c.to_dict() for c in clothings]
@@ -153,12 +159,15 @@ class Customs(Resource):
             
             user = User.query.filter_by(id=user_id).first()
             clothing = Clothing.query.filter_by(id=clothing_id).first()
+            for custom in user.customs:
+                print(custom.clothing_id)
+                clo = Clothing.query.filter_by(id=custom.clothing_id).one_or_none()
+                print(clo)
+                if custom.quantity >= clo.stock:
+                    return { 'error': f'Only {custom.quantity} in Stock.' }, 404
 
-            existing_custom = Custom.query \
-                .filter_by(user_id=user_id, clothing_id=clothing_id).first()
-
-            if existing_custom:
-                return { 'error': 'Already In Cart' }, 400
+            if not Clothings.in_stock(clothing):
+                return { 'error': 'Out of Stock' }, 400
 
             new_custom = user.clothings.creator(clothing, user_id)
             db.session.add(new_custom)
