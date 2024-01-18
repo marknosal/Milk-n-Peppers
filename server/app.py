@@ -159,15 +159,16 @@ class Customs(Resource):
             
             user = User.query.filter_by(id=user_id).first()
             clothing = Clothing.query.filter_by(id=clothing_id).first()
-            for custom in user.customs:
-                print(custom.clothing_id)
-                clo = Clothing.query.filter_by(id=custom.clothing_id).one_or_none()
-                print(clo)
-                if custom.quantity >= clo.stock:
-                    return { 'error': f'Only {custom.quantity} in Stock.' }, 404
+            custom_count = 0
+            for c in Custom.query.filter_by(clothing_id=clothing_id, user_id=user_id).all():
+                custom_count += c.quantity
 
             if not Clothings.in_stock(clothing):
                 return { 'error': 'Out of Stock' }, 400
+            
+            if custom_count >= clothing.stock:
+                return { 'error': f'Only {clothing.stock} in Stock' }, 404
+
 
             new_custom = user.clothings.creator(clothing, user_id)
             db.session.add(new_custom)
@@ -184,18 +185,22 @@ class Customs(Resource):
         try:
             user_id = session.get('user_id')
             price_id = data.get('price_id')
-            custom = (
-                Custom.query
-                .filter_by(user_id=user_id)
-                .join(Custom.clothing)
-                .filter(Clothing.stripe_price_id==price_id)
-                .first()
-            )
-            custom.purchased = True
-            clothing = Clothing.query.filter(Clothing.stripe_price_id==price_id).one_or_none()
-            clothing.stock -= custom.quantity
-            db.session.commit()
-            return custom.to_dict(), 200
+            thing = Custom.query \
+                .filter(Custom.user_id==user_id, Custom.purchased==False) \
+                .join(Custom.clothing) \
+                .filter(Clothing.stripe_price_id==price_id) \
+                .all()
+                # .update({Custom.purchased: True}, synchronize_session=False)
+            
+            for thang in thing:
+                clothing = Clothing.query.filter(Clothing.stripe_price_id==price_id).one_or_none()
+                clothing.stock = clothing.stock - thang.quantity
+                thang.purchased = True
+            if thing:
+                print(thing)
+                db.session.commit()
+                return [thang.to_dict() for thang in thing], 200
+            return {}, 204
         except Exception as e:
             return { 'error': str(e) }, 500
         

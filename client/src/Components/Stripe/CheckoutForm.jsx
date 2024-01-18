@@ -9,6 +9,7 @@ const stripePromise = loadStripe('pk_test_51OYuqDAY4XFYCSiOnDX5xG8yvIYzOslPPnyBy
 
 export default function CheckoutForm () {
     const [clientSecret, setClientSecret] = useState('')
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         fetch('/create-checkout-session', {
@@ -18,7 +19,7 @@ export default function CheckoutForm () {
                 response.json().then(data => setClientSecret(data.clientSecret))
             } else {
                 response.json().then(error => (
-                    <h1>{error.error}</h1>
+                    setError(error)
                 ))
             }
         })
@@ -26,14 +27,22 @@ export default function CheckoutForm () {
             
     }, [])
 
-    return (
-        <div id='checkout'>
-            {clientSecret && (
-                <EmbeddedCheckoutProvider stripe={stripePromise} options={{clientSecret}}>
-                    <EmbeddedCheckout />
-                </EmbeddedCheckoutProvider>
-            )}
-        </div>
-
-    )
+    if (!error) {
+        return (
+            <div id='checkout'>
+                {clientSecret && (
+                    <EmbeddedCheckoutProvider stripe={stripePromise} options={{clientSecret}}>
+                        <EmbeddedCheckout />
+                    </EmbeddedCheckoutProvider>
+                )}
+            </div>
+    
+        )
+    } else if (error) {
+        return (
+            <div>
+                <h1>{error.error}</h1>
+            </div>
+        )
+    }
 }
