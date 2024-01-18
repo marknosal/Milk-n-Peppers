@@ -16,7 +16,6 @@ export default function CustomizationPortal({ open, onSave, onCancel, custom }) 
         },
         validationSchema: mySchema,
         onSubmit: (values) => {
-            console.log('in submit')
             fetch(`/customs/${custom.id}`, {
                 method: 'PATCH',
                 headers: {
@@ -48,10 +47,10 @@ export default function CustomizationPortal({ open, onSave, onCancel, custom }) 
                         <TextArea
                             style={{
                                 width: '100%',
-                                resize: 'none', // Disable horizontal resizing
+                                resize: 'none',
                                 overflowY: 'auto',
                             }}
-                            placeholder="Personal Measurements & Special Requests"
+                            placeholder="Please reach out if you would like an alteration quote @ milknpeppers@gmail.com"
                             type="text"
                             id="notes"
                             name="notes"

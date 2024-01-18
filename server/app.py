@@ -80,17 +80,34 @@ class Signup(Resource):
                 delattr(new_user, 'passwordConfirm')
                 db.session.add(new_user)
                 db.session.commit()
-                return new_user.to_dict(), 202
+                return new_user.to_dict(), 201
             return {'error': f'Username already exists'}, 422
         
         except Exception as e:
-            return {'error': str(e)}, 422
+            return {'error': str(e)}, 400
 
 class Blogs(Resource):
     def get(self):
         blogs = Blog.query.all()
         blogs_dict = [b.to_dict() for b in blogs]
         return blogs_dict, 200
+    
+    def post(self):
+        data = request.get_json()
+        try:
+            user_id = session.get('user_id')
+            print(data)
+            if user_id == 101:
+                new_blog = Blog()
+                for key, value in data.items():
+                    setattr(new_blog, key, value)
+                print(new_blog)
+                db.session.add(new_blog)
+                db.session.commit()
+                return new_blog.to_dict(), 201
+            return { 'error': 'Unauthorized' }, 401
+        except Exception as e:
+            return { 'error': str(e) }, 400
     
 class Clothings(Resource):
     @classmethod
