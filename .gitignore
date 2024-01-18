@@ -78,7 +78,7 @@ server/migrations/versions/db387cee2e8f_add_description_to_clothings_table.py
 server/__pycache__/**
 
 .env
-server/instance/app.db
+/server/instance/app.db
 server/__pycache__/app.cpython-39.pyc
 server/instance/app.db
 app.db
