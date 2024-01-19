@@ -113,7 +113,7 @@ class Clothings(Resource):
     @classmethod
     def in_stock(self, clothing):
         # will need to add logic here if you ever allow user to purchase more than 1
-        users_cart = User.query.filter_by(id=session.get('user_id')).one_or_none()
+        # users_cart = User.query.filter_by(id=session.get('user_id')).one_or_none()
         return clothing.stock
         
     def get(self):
