@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 
 from flask import request, session, abort, jsonify, redirect
 from flask_restful import Resource
@@ -11,7 +12,7 @@ from models import User, Clothing, Blog, Custom, ClothingImagePath
 
 YOUR_DOMAIN = 'http://localhost:4000'
 
-stripe.api_key = 'sk_test_51OYuqDAY4XFYCSiOOP7aCo5pUOLoEsF9lSq3RVwxao4hb7LOWLGwPIQJqNBE2e51rfuJKKXXnrR6DNfaat1j9EI100EnRvmI0a'
+stripe.api_key = os.getenv('FLASK_LIVE_SECRET_KEY')
 
 @app.route('/')
 def index():

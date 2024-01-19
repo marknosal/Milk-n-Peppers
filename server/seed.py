@@ -77,20 +77,20 @@ if __name__ == '__main__':
         # print('Clothings created.')
 
         # Create Custom records
-        print('Creating customs...')
-        customs = []
-        clothings = Clothing.query.all()
-        for i in range(20):
-            new_custom = Custom(
-                notes=fake.sentence(nb_words=randint(0, 250)),
-                user=rc(users),
-                clothing=rc(clothings),
-                purchased=False
-            )
-            customs.append(new_custom)
-        db.session.add_all(customs)
-        db.session.commit()
-        print('Customs created.')
+        # print('Creating customs...')
+        # customs = []
+        # clothings = Clothing.query.all()
+        # for i in range(20):
+        #     new_custom = Custom(
+        #         notes=fake.sentence(nb_words=randint(0, 250)),
+        #         user=rc(users),
+        #         clothing=rc(clothings),
+        #         purchased=False
+        #     )
+        #     customs.append(new_custom)
+        # db.session.add_all(customs)
+        # db.session.commit()
+        # print('Customs created.')
 
         # Create Blog records
         print('Creating blogs...')

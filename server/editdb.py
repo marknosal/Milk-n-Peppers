@@ -38,71 +38,71 @@ with app.app_context():
     #     if cl.id in descriptions:
     #         cl.description = descriptions[cl.id]
 
-    # real_stripe_price_ids = {
-    #     1: 'price_1OYxKyAY4XFYCSiOaBIQQNkQ',
-    #     2: 'price_1OYxNOAY4XFYCSiO03yIKpBW',
-    #     3: 'price_1OYxR9AY4XFYCSiOePqzCWes',
-    #     4: 'price_1OYxSJAY4XFYCSiOtldrCKc6',
-    #     5: 'price_1OYxTtAY4XFYCSiOU5UGFp43',
-    #     6: 'price_1OYxV4AY4XFYCSiOjZ2oDFcN',
-    #     7: 'price_1OYxWQAY4XFYCSiOwETOGPxl',
-    #     8: 'price_1OYxXxAY4XFYCSiOmRfj10lw',
-    #     9: 'price_1OYxZ0AY4XFYCSiOnraeWfpP',
-    #     10: 'price_1OYxZnAY4XFYCSiOQnz2goUk',
-    #     11: 'price_1OYxavAY4XFYCSiO8GYQuOMV',
-    #     12: 'price_1OYxc0AY4XFYCSiOTSrFRJzz',
-    #     13: 'price_1OYxIQAY4XFYCSiOLTv6Q5nU',
-    #     14: 'price_1OYxdYAY4XFYCSiO5ZvAa7Cj',
-    #     15: 'price_1OYxg8AY4XFYCSiOSkHVwAwW',
-    #     16: 'price_1OYxhUAY4XFYCSiOuWb66l2G',
-    #     17: 'price_1OYxjWAY4XFYCSiOC1BEfobH',
-    #     18: 'price_1OYxlvAY4XFYCSiO2prE5bUg',
-    #     19: 'price_1OYxnMAY4XFYCSiOne6eET1P',
-    #     20: 'price_1OYxo9AY4XFYCSiOYEqdcoAb',
-    #     21: 'price_1OYxouAY4XFYCSiOC6jtNtwL',
-    #     22: 'price_1OYxprAY4XFYCSiOPSvIfFuV',
-    #     23: 'price_1OYxqYAY4XFYCSiO3GZcExQO',
-    #     24: 'price_1OYxrSAY4XFYCSiOLU3760dy',
-    #     25: 'price_1OYxsfAY4XFYCSiO3J9DLlGq',
-    #     26: 'price_1OYxtSAY4XFYCSiO4UuNKRk3',
-    #     27: 'price_1OYxulAY4XFYCSiOLrybmBE5',
-    # }
-    # for cl in clothings:
-    #     if cl.id in real_stripe_price_ids:
-    #         cl.stripe_price_id = real_stripe_price_ids[cl.id]
-
-    test_stripe_price_ids = {
-        1: 'price_1OZaLcAY4XFYCSiOAm27r3eI',
-        2: 'price_1OZaN2AY4XFYCSiOXeJextFP',
-        3: 'price_1OZaO4AY4XFYCSiOj2hddSMw',
-        4: 'price_1OZaOmAY4XFYCSiOD8JNTVfU',
-        5: 'price_1OZaPUAY4XFYCSiO8HwsmXFj',
-        6: 'price_1OZaQ9AY4XFYCSiOCncOLLJt',
-        7: 'price_1OZaR2AY4XFYCSiOJtDCBKYt',
-        8: 'price_1OZaRpAY4XFYCSiOPO3mRTTb',
-        9: 'price_1OZaSeAY4XFYCSiOK7HUUN7v',
-        10: 'price_1OZaTCAY4XFYCSiOHQ6fVebw',
-        11: 'price_1OZaTkAY4XFYCSiOsijGVJv1',
-        12: 'price_1OZaUWAY4XFYCSiOWlcQXSbR',
-        13: 'price_1OYxFxAY4XFYCSiOGyvb7spe',
-        14: 'price_1OZaV5AY4XFYCSiOwGCsKJOZ',
-        15: 'price_1OZaVfAY4XFYCSiORLeXEkF0',
-        16: 'price_1OZaWJAY4XFYCSiOVVBj9tLi',
-        17: 'price_1OZaWuAY4XFYCSiOHx7OoXiR',
-        18: 'price_1OZaXXAY4XFYCSiOUkqzQZ74',
-        19: 'price_1OZaY3AY4XFYCSiOI6iJ1xOq',
-        20: 'price_1OZaYlAY4XFYCSiO7WP9BRN8',
-        21: 'price_1OZaZPAY4XFYCSiOgADinS85',
-        22: 'price_1OZaZtAY4XFYCSiOaUiP2AQJ',
-        23: 'price_1OZaaNAY4XFYCSiORYuhulUT',
-        24: 'price_1OZab2AY4XFYCSiOHz06crDQ',
-        25: 'price_1OZabuAY4XFYCSiOB2kNXfmH',
-        26: 'price_1OZacfAY4XFYCSiOean86CRl',
-        27: 'price_1OZadGAY4XFYCSiOaQ5oIoQN',
+    real_stripe_price_ids = {
+        1: 'price_1OYxKyAY4XFYCSiOaBIQQNkQ',
+        2: 'price_1OYxNOAY4XFYCSiO03yIKpBW',
+        3: 'price_1OYxR9AY4XFYCSiOePqzCWes',
+        4: 'price_1OYxSJAY4XFYCSiOtldrCKc6',
+        5: 'price_1OYxTtAY4XFYCSiOU5UGFp43',
+        6: 'price_1OYxV4AY4XFYCSiOjZ2oDFcN',
+        7: 'price_1OYxWQAY4XFYCSiOwETOGPxl',
+        8: 'price_1OYxXxAY4XFYCSiOmRfj10lw',
+        9: 'price_1OYxZ0AY4XFYCSiOnraeWfpP',
+        10: 'price_1OYxZnAY4XFYCSiOQnz2goUk',
+        11: 'price_1OYxavAY4XFYCSiO8GYQuOMV',
+        12: 'price_1OYxc0AY4XFYCSiOTSrFRJzz',
+        13: 'price_1OYxIQAY4XFYCSiOLTv6Q5nU',
+        14: 'price_1OYxdYAY4XFYCSiO5ZvAa7Cj',
+        15: 'price_1OYxg8AY4XFYCSiOSkHVwAwW',
+        16: 'price_1OYxhUAY4XFYCSiOuWb66l2G',
+        17: 'price_1OYxjWAY4XFYCSiOC1BEfobH',
+        18: 'price_1OYxlvAY4XFYCSiO2prE5bUg',
+        19: 'price_1OYxnMAY4XFYCSiOne6eET1P',
+        20: 'price_1OYxo9AY4XFYCSiOYEqdcoAb',
+        21: 'price_1OYxouAY4XFYCSiOC6jtNtwL',
+        22: 'price_1OYxprAY4XFYCSiOPSvIfFuV',
+        23: 'price_1OYxqYAY4XFYCSiO3GZcExQO',
+        24: 'price_1OYxrSAY4XFYCSiOLU3760dy',
+        25: 'price_1OYxsfAY4XFYCSiO3J9DLlGq',
+        26: 'price_1OYxtSAY4XFYCSiO4UuNKRk3',
+        27: 'price_1OYxulAY4XFYCSiOLrybmBE5',
     }
     for cl in clothings:
-        if cl.id in test_stripe_price_ids:
-            cl.stripe_price_id = test_stripe_price_ids[cl.id]
+        if cl.id in real_stripe_price_ids:
+            cl.stripe_price_id = real_stripe_price_ids[cl.id]
+
+    # test_stripe_price_ids = {
+    #     1: 'price_1OZaLcAY4XFYCSiOAm27r3eI',
+    #     2: 'price_1OZaN2AY4XFYCSiOXeJextFP',
+    #     3: 'price_1OZaO4AY4XFYCSiOj2hddSMw',
+    #     4: 'price_1OZaOmAY4XFYCSiOD8JNTVfU',
+    #     5: 'price_1OZaPUAY4XFYCSiO8HwsmXFj',
+    #     6: 'price_1OZaQ9AY4XFYCSiOCncOLLJt',
+    #     7: 'price_1OZaR2AY4XFYCSiOJtDCBKYt',
+    #     8: 'price_1OZaRpAY4XFYCSiOPO3mRTTb',
+    #     9: 'price_1OZaSeAY4XFYCSiOK7HUUN7v',
+    #     10: 'price_1OZaTCAY4XFYCSiOHQ6fVebw',
+    #     11: 'price_1OZaTkAY4XFYCSiOsijGVJv1',
+    #     12: 'price_1OZaUWAY4XFYCSiOWlcQXSbR',
+    #     13: 'price_1OYxFxAY4XFYCSiOGyvb7spe',
+    #     14: 'price_1OZaV5AY4XFYCSiOwGCsKJOZ',
+    #     15: 'price_1OZaVfAY4XFYCSiORLeXEkF0',
+    #     16: 'price_1OZaWJAY4XFYCSiOVVBj9tLi',
+    #     17: 'price_1OZaWuAY4XFYCSiOHx7OoXiR',
+    #     18: 'price_1OZaXXAY4XFYCSiOUkqzQZ74',
+    #     19: 'price_1OZaY3AY4XFYCSiOI6iJ1xOq',
+    #     20: 'price_1OZaYlAY4XFYCSiO7WP9BRN8',
+    #     21: 'price_1OZaZPAY4XFYCSiOgADinS85',
+    #     22: 'price_1OZaZtAY4XFYCSiOaUiP2AQJ',
+    #     23: 'price_1OZaaNAY4XFYCSiORYuhulUT',
+    #     24: 'price_1OZab2AY4XFYCSiOHz06crDQ',
+    #     25: 'price_1OZabuAY4XFYCSiOB2kNXfmH',
+    #     26: 'price_1OZacfAY4XFYCSiOean86CRl',
+    #     27: 'price_1OZadGAY4XFYCSiOaQ5oIoQN',
+    # }
+    # for cl in clothings:
+    #     if cl.id in test_stripe_price_ids:
+    #         cl.stripe_price_id = test_stripe_price_ids[cl.id]
 
     
     db.session.commit()
