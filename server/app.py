@@ -12,7 +12,7 @@ from models import User, Clothing, Blog, Custom, ClothingImagePath
 
 YOUR_DOMAIN = 'http://localhost:4000'
 
-stripe.api_key = os.getenv('FLASK_LIVE_SECRET_KEY')
+stripe.api_key = os.getenv('STRIPE_LIVE_SECRET_KEY')
 
 @app.route('/')
 def index():
