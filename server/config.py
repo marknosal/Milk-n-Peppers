@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 
 app = Flask(__name__, static_url_path='/static')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://marknosal:F00ozyXHijLa6oU4aL4wBiVruQicpGeq@dpg-cmnapb21hbls73cks6mg-a.ohio-postgres.render.com/app_bmr7'
 app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 app.json.compact = False
 
