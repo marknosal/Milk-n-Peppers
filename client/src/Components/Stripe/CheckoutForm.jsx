@@ -4,8 +4,7 @@ import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe
 // import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import '../../index.css';
-
-const stripePromise = loadStripe('pk_live_51OYuqDAY4XFYCSiOWUEuRU6meiAb2M2oa2DV5xkIWB2qSRG4054BagmqwMVUgX03LAEAx3wrxsCix1AHiKol4GsN003rcQ93s2')
+const stripePromise = loadStripe('pk_test_51OYuqDAY4XFYCSiOnDX5xG8yvIYzOslPPnyByhoZG9fWnsJaxsi3cplRtIns4iVZLAz0wNk4HpBPilztfV0C2fjP00Hdkoq1lT')
 
 export default function CheckoutForm () {
     const [clientSecret, setClientSecret] = useState('')
