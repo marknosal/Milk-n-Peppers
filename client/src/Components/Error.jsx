@@ -1,7 +1,3 @@
-export default function Error ({ error }) {
-    return (
-        <div>
-            {error && error.error}
-        </div>
-    )
+export default function Error({ error }) {
+    return <div>{error && error.error}</div>;
 }

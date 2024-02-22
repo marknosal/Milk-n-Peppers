@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
-import'../../index.css'
+import React, { useState } from 'react';
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
+import '../../index.css';
 
-export default function Login () {
-    const [showLogin, setShowLogin] = useState(true)
+export default function Login() {
+    const [showLogin, setShowLogin] = useState(true);
     return (
         <div className="login">
             {showLogin ? (
                 <div>
                     <LoginForm />
-                    <hr/>
+                    <hr />
                     Don't have an account?
                     <button onClick={() => setShowLogin(!showLogin)}>
                         Sign Up!
@@ -19,7 +19,7 @@ export default function Login () {
             ) : (
                 <div>
                     <SignupForm />
-                    <hr/>
+                    <hr />
                     Already have an account?
                     <button onClick={() => setShowLogin(!showLogin)}>
                         Log In!
@@ -27,5 +27,5 @@ export default function Login () {
                 </div>
             )}
         </div>
-    )
+    );
 }

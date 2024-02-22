@@ -1,67 +1,78 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Divider, Segment, SegmentGroup, Header, Button, Label } from "semantic-ui-react";
-import "../../index.css"
-import CartItem from "./CartItem";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+    Divider,
+    Segment,
+    SegmentGroup,
+    Header,
+    Button,
+    Label,
+} from 'semantic-ui-react';
+import '../../index.css';
+import CartItem from './CartItem';
 // import CheckoutPortal from "./CheckoutPortal";
 
-export default function Cart () {
+export default function Cart() {
     // const { user } = useContext(UserContext)
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState([]);
     // const [showCheckout, setShowCheckout] = useState(null)
 
-    const navigate = useNavigate()
-    
-    useEffect(() =>  {
+    const navigate = useNavigate();
+
+    useEffect(() => {
         fetch('/customs')
-        .then(response => response.json())
-        .then(data => {
-            if (!data.error) {
-                setCart(data)
-            } else {
-                console.log(data.error)
-            }
-        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (!data.error) {
+                    setCart(data);
+                } else {
+                    console.log(data.error);
+                }
+            });
     }, []);
 
-    const cartTotal = cart.reduce((total, c) => total + c.clothing.price, 0)
-    
-    const cartItems = Array.isArray(cart) && cart.length > 0 ? (
-        cart.map(c => (
-            <CartItem key={c.id} cartItem={c} onDeleteClick={handleDeleteClick} setCart={setCart} cart={cart} />
-        ))
-    ) : (
-        <Segment>Cart Empty!</Segment>
-    );
+    const cartTotal = cart.reduce((total, c) => total + c.clothing.price, 0);
 
+    const cartItems =
+        Array.isArray(cart) && cart.length > 0 ? (
+            cart.map((c) => (
+                <CartItem
+                    key={c.id}
+                    cartItem={c}
+                    onDeleteClick={handleDeleteClick}
+                    setCart={setCart}
+                    cart={cart}
+                />
+            ))
+        ) : (
+            <Segment>Cart Empty!</Segment>
+        );
 
     function handleDeleteClick(cartId) {
         fetch(`/customs/${cartId}`, {
             method: 'DELETE',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
             if (response.ok) {
-                handleDelete(cartId)
+                handleDelete(cartId);
             } else {
-                response.json().then(data => {
-                    console.log('not deleted')
-                })
+                response.json().then((data) => {
+                    console.log('not deleted');
+                });
             }
-        })
+        });
     }
 
     function handleDelete(deletedId) {
-        const updatedCart = cart.filter(c => (
-            c.id !== deletedId
-        ))
-        setCart(updatedCart)
+        const updatedCart = cart.filter((c) => c.id !== deletedId);
+        setCart(updatedCart);
     }
 
     function handlePurchaseClick() {
-        navigate('/checkout')
+        navigate('/checkout');
     }
 
     // const handleCheckoutClick = () => {
@@ -73,17 +84,17 @@ export default function Cart () {
     return (
         <div className="cart-container">
             <Divider horizontal>Cart</Divider>
-            <Button className="purchase-button" content='Purchase' />
-            <SegmentGroup>
+            <Button className="purchase-button" content="Purchase" />
+            <SegmentGroup>{cartItems}</SegmentGroup>
 
-                {cartItems}
-            </SegmentGroup>
-
-            <Header className="cartTotalH1" as='h1' textAlign="right">
-                <Label 
-                    style={{ marginBottom: '5px', cursor: cart.length > 0 ? 'pointer' : 'not-allowed' }} 
-                    pointing='right' 
-                    color="orange" 
+            <Header className="cartTotalH1" as="h1" textAlign="right">
+                <Label
+                    style={{
+                        marginBottom: '5px',
+                        cursor: cart.length > 0 ? 'pointer' : 'not-allowed',
+                    }}
+                    pointing="right"
+                    color="orange"
                     size="big"
                     onClick={cart.length > 0 ? handlePurchaseClick : null}
                 >
@@ -97,5 +108,5 @@ export default function Cart () {
                 cart={cartItems}
             /> */}
         </div>
-    )
+    );
 }

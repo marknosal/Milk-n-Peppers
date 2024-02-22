@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { Container, Message, Header, Icon } from 'semantic-ui-react';
-import { /*BrowserRouter as Router, Route, Routes,*/ Navigate } from 'react-router-dom';
+import {
+    /*BrowserRouter as Router, Route, Routes,*/ Navigate,
+} from 'react-router-dom';
 
-export default function Return () {
-    const [status, setStatus] = useState(null)
-    const [customerEmail, setCustomerEmail] = useState('')
-    const [priceIds, setPriceIds] = useState([])
+export default function Return() {
+    const [status, setStatus] = useState(null);
+    const [customerEmail, setCustomerEmail] = useState('');
+    const [priceIds, setPriceIds] = useState([]);
 
     useEffect(() => {
         const queryString = window.location.search;
@@ -13,18 +15,16 @@ export default function Return () {
         const sessionId = urlParams.get('session_id');
 
         fetch(`/session-status?session_id=${sessionId}`)
-            .then(response => response.json())
-                .then(data => {
-                    setStatus(data.status)
-                    setCustomerEmail(data.customer_email)
-                    setPriceIds(data.priceIds)
-                });
+            .then((response) => response.json())
+            .then((data) => {
+                setStatus(data.status);
+                setCustomerEmail(data.customer_email);
+                setPriceIds(data.priceIds);
+            });
     }, []);
 
     if (status === 'open') {
-        return (
-            <Navigate to='/checkout' />
-        )
+        return <Navigate to="/checkout" />;
     }
 
     if (status === 'complete') {
@@ -33,28 +33,32 @@ export default function Return () {
                 fetch('/customs', {
                     method: 'PATCH',
                     headers: {
-                        'Accept': 'application/json',
+                        Accept: 'application/json',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({'price_id': priceId})
-                })
-            })
+                    body: JSON.stringify({ price_id: priceId }),
+                });
+            });
         }
 
         return (
             <Container text style={{ marginTop: '2em', textAlign: 'center' }}>
-                <Message success color='orange' icon>
-                    <Icon name='check circle' size='big' color='green' />
+                <Message success color="orange" icon>
+                    <Icon name="check circle" size="big" color="green" />
                     <Message.Content>
-                        <Header as='h2' color='orange'>
+                        <Header as="h2" color="orange">
                             Thank you for your purchase!
                         </Header>
                         <p>
-                            A confirmation email will be sent to {customerEmail}.
+                            A confirmation email will be sent to {customerEmail}
+                            .
                         </p>
                         <p>
                             If you have any questions, please email{' '}
-                            <a href='mailto:milknpeppers@gmail.com'>milknpeppers@gmail.com</a>.
+                            <a href="mailto:milknpeppers@gmail.com">
+                                milknpeppers@gmail.com
+                            </a>
+                            .
                         </p>
                     </Message.Content>
                 </Message>

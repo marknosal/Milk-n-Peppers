@@ -1,12 +1,14 @@
-import React from "react";
+import React from 'react';
 // import { useFormik } from "formik";
 // import * as yup from "yup";
-import { Portal, Segment/*, Button, Form, Label, TextArea*/ } from "semantic-ui-react";
-import "../../index.css"
-import CheckoutForm from "../Stripe/CheckoutForm";
+import {
+    Portal,
+    Segment /*, Button, Form, Label, TextArea*/,
+} from 'semantic-ui-react';
+import '../../index.css';
+import CheckoutForm from '../Stripe/CheckoutForm';
 
 export default function CheckoutPortal({ open, onSave, onCancel, custom }) {
-
     // const mySchema = yup.object().shape({
     //     notes: yup.string().required('Must exist').min(1),
     // })
@@ -42,7 +44,15 @@ export default function CheckoutPortal({ open, onSave, onCancel, custom }) {
 
     return (
         <Portal open={open}>
-            <Segment style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} color="orange">
+            <Segment
+                style={{
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                }}
+                color="orange"
+            >
                 <CheckoutForm />
             </Segment>
         </Portal>

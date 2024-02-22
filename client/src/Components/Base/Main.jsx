@@ -1,31 +1,38 @@
-import React from 'react'
-import '../../index.css'
-import { Routes, Route } from 'react-router-dom'
+import React from 'react';
+import '../../index.css';
+import { Routes, Route } from 'react-router-dom';
 
-import Home from '../Home/Home'
-import Login from '../Login/Login'
-import Profile from '../Profile/Profile'
-import About from '../About/About'
-import Blog from '../Blog/Blog'
-import Clothes from '../Clothes/Clothes'
-import CheckoutForm from '../Stripe/CheckoutForm'
-import Return from '../Stripe/Return'
+import Home from '../Home/Home';
+import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
+import About from '../About/About';
+import Blog from '../Blog/Blog';
+import Clothes from '../Clothes/Clothes';
+import CheckoutForm from '../Stripe/CheckoutForm';
+import Return from '../Stripe/Return';
 
 export default function Main({ routeLinks }) {
-
     function genAllRoutes(routeLinks) {
         const allRoutes = routeLinks.map((routeString, index) => (
-            <Route key={index} exact path={routeString === 'home' ? '/' : `/${routeString}`}>
+            <Route
+                key={index}
+                exact
+                path={routeString === 'home' ? '/' : `/${routeString}`}
+            >
                 {getComponentForRoute(routeString)}
             </Route>
         ));
 
         allRoutes.push(
-            <Route key="checkout" path="/checkout" element={<CheckoutForm />} />,
-            <Route key="return" path="/return" element={<Return />} />
+            <Route
+                key="checkout"
+                path="/checkout"
+                element={<CheckoutForm />}
+            />,
+            <Route key="return" path="/return" element={<Return />} />,
         );
 
-        return allRoutes
+        return allRoutes;
     }
     function getComponentForRoute(routeString) {
         switch (routeString) {
@@ -47,15 +54,12 @@ export default function Main({ routeLinks }) {
                 return <Route path="/return" element={<Return />} />;
             default:
                 return null;
-
         }
     }
 
     return (
-        <div className='main-container'>
-            <Routes>
-                {genAllRoutes(routeLinks)}
-            </Routes>
+        <div className="main-container">
+            <Routes>{genAllRoutes(routeLinks)}</Routes>
         </div>
-    )
+    );
 }

@@ -1,20 +1,28 @@
 import React from 'react';
 import { Segment, Icon, Message } from 'semantic-ui-react';
 
-export default function BaseHeader () {
+export default function BaseHeader() {
     return (
-        <Segment color='orange'>
+        <Segment color="orange">
             <Message icon>
-                <Icon name='envelope outline' />
+                <Icon name="envelope outline" />
                 <Message.Content>
                     <Message.Header>Connect with Us!</Message.Header>
                     <p>
                         Find us on{' '}
-                        <a href="https://www.depop.com/" target="_blank" rel="noopener noreferrer">
+                        <a
+                            href="https://www.depop.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             Depop
                         </a>{' '}
                         and{' '}
-                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                        <a
+                            href="https://www.instagram.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             Instagram
                         </a>{' '}
                         for the latest updates.
@@ -24,5 +32,4 @@ export default function BaseHeader () {
             </Message>
         </Segment>
     );
-};
-
+}

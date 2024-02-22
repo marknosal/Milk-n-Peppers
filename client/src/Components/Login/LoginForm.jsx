@@ -1,20 +1,20 @@
-import React, { useContext, useState } from "react";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import Error from "../Error";
-import { UserContext } from "../Context/UserContext";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import Error from '../Error';
+import { UserContext } from '../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
-export default function LoginForm () {
-    const [error, setError] = useState(null)
-    const { login } = useContext(UserContext)
+export default function LoginForm() {
+    const [error, setError] = useState(null);
+    const { login } = useContext(UserContext);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const valSchema = yup.object().shape({
         username: yup.string().required('Must exist'),
         password: yup.string().required('Must exist'),
-    })
+    });
 
     const formik = useFormik({
         initialValues: {
@@ -26,27 +26,27 @@ export default function LoginForm () {
             fetch('/login', {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
+                    Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(values)
-            }).then(response => {
+                body: JSON.stringify(values),
+            }).then((response) => {
                 if (response.ok) {
-                    response.json().then(data => {
-                        login(data)
-                        setError(null)
-                        resetForm()
-                        navigate('/')
-                    })
+                    response.json().then((data) => {
+                        login(data);
+                        setError(null);
+                        resetForm();
+                        navigate('/');
+                    });
                 } else {
-                    response.json().then(data => {
-                        setError(data)
-                        resetForm()
-                    })
+                    response.json().then((data) => {
+                        setError(data);
+                        resetForm();
+                    });
                 }
-            })
-        }
-    })
+            });
+        },
+    });
 
     return (
         <div className="login-form">
@@ -55,23 +55,23 @@ export default function LoginForm () {
                 <div>
                     <label htmlFor="username">Username: </label>
                     <input
-                        type = 'text'
-                        id = 'username'
-                        name = 'username'
-                        onChange = {formik.handleChange}
-                        value = {formik.values.username}
+                        type="text"
+                        id="username"
+                        name="username"
+                        onChange={formik.handleChange}
+                        value={formik.values.username}
                     />
                     <p>{formik.errors.username}</p>
                 </div>
                 <div>
                     <label htmlFor="password">Password: </label>
                     <input
-                        type = 'password'
-                        id = 'password'
-                        name = 'password'
+                        type="password"
+                        id="password"
+                        name="password"
                         autoComplete="on"
-                        onChange = {formik.handleChange}
-                        value = {formik.values.password}
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
                     />
                     <p>{formik.errors.password}</p>
                 </div>
@@ -79,5 +79,5 @@ export default function LoginForm () {
             </form>
             <Error error={error} />
         </div>
-    )
+    );
 }
